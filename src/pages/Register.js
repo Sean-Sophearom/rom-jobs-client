@@ -1,25 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 //components
 import Logo from "../components/Logo";
 import Button from "../components/Button";
-import PasswordInput from "../components/PasswordInput";
+import Input from "../components/Input";
 import Radio from "../components/Radio";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { signup, clearAllError, clearError, setError, selectUser } from "../redux/slices/userSlice";
 
 //react icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const inputClass =
-  "text-sm text-gray-700 bg-gray-100 box-border py-2 px-4 ring-1 ring-purple-200 rounded-sm focus:outline-none  focus:ring-2 focus:ring-purple-500";
+  "text-sm text-gray-700 bg-gray-100 box-border p-2 ring-1 ring-purple-200 rounded-sm focus:outline-none  focus:ring-2 focus:ring-purple-500";
 
 const Register = () => {
   const [showPw, setShowPw] = React.useState(false);
   const [radio, setRadio] = React.useState("");
+  const [input, setInput] = React.useState({ username: "", password: "" });
+  const dispatch = useDispatch();
+  const { error } = useSelector(selectUser);
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(clearAllError());
+  }, []);
+
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+    dispatch(clearError(e.target.name));
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("fu");
+    if (!input.username) return dispatch(setError({ errorType: "username", data: "Please fill in your username." }));
+    if (!input.password) return dispatch(setError({ errorType: "password", data: "Please fill in your password." }));
+    if (!radio) setRadio("employee");
+
+    dispatch(signup({ userInfo: { username: input.username, password: input.password, accType: radio } }));
   };
 
   const togglePasswordVisibility = () => setShowPw(!showPw);
@@ -31,19 +52,23 @@ const Register = () => {
 
       <div className="h-screen grid place-items-center box">
         <div className="flex flex-col">
-          <h1 className=" text-2xl md:text-3xl lg:text-4xl gap-2 text-center">Register an Account</h1>
-          <h2 className="text-gray-400 text-center md:text-lg lg:text-xl mt-2 mb-1">Enter your details below</h2>
+          <h1 className="flex text-2xl sm:text-3xl md:text-4xl gap-2 px-5 justify-center">Register an Account</h1>
+          <h2 className="text-gray-400 text-center md:text-lg mt-2 mb-1">Enter your details below</h2>
+
           <form>
             <div className="flex flex-col mt-4">
               <label htmlFor="username" className="mb-2 text-lg">
                 Username
               </label>
-              <input
+              <Input
+                value={input.username}
+                onChange={handleChange}
                 id="username"
                 name="username"
                 type="text"
                 className={inputClass}
                 placeholder="Enter your username"
+                error={error.username}
               />
             </div>
 
@@ -51,7 +76,9 @@ const Register = () => {
               <label htmlFor="Password" className="mb-2 text-lg">
                 Password
               </label>
-              <PasswordInput
+              <Input
+                value={input.password}
+                onChange={handleChange}
                 id="password"
                 name="password"
                 type={showPw ? "text" : "password"}
@@ -59,6 +86,7 @@ const Register = () => {
                 placeholder="Enter your password"
                 icon={showPw ? AiOutlineEyeInvisible : AiOutlineEye}
                 iconOnClick={togglePasswordVisibility}
+                error={error.password}
               />
             </div>
 
@@ -72,8 +100,9 @@ const Register = () => {
                   checked={radio === "employer"}
                   onClick={() => setRadio("employer")}
                 />
-                <label onClick={() => setRadio("employer")}>Hire people</label>
+                <label onClick={() => setRadio("employer")}>Hire employees</label>
               </div>
+
               <div className="flex gap-2 text-gray-500 items-center mt-1">
                 <Radio
                   fontSize={18}
