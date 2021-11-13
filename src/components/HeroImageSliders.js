@@ -15,7 +15,7 @@ const ImageSliderrr = () => {
     return () => clearTimeout(timeout);
   }, [index]);
   return (
-    <div className="box">
+    <div className="box mt-12 md:mt-16">
       <div className="rounded-lg mt-4 bg-gradient-to-bl from-purple-300 to-purple-200 relative flex justify-center items-center overflow-x-hidden">
         <HeroImageOne index={index} />
         <HeroImageTwo index={index} />

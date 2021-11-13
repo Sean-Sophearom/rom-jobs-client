@@ -13,6 +13,7 @@ import Button from "./Button";
 //icons component
 import ReactCountryFlag from "react-country-flag";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
 
 //react router
 import { useHistory } from "react-router-dom";
@@ -45,6 +46,8 @@ const Navbar = () => {
   }, []);
 
   const toggleLanguage = () => dispatch(toggleLang());
+  const openNav = () => setIsOpen(true);
+  const closeNav = () => setIsOpen(false);
 
   const LanguageComponent = () => (
     <div className="flex justify-center items-center group relative hover:scale-110">
@@ -71,9 +74,10 @@ const Navbar = () => {
       <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-screen top-0 z-50">
         <div className="box flex justify-between items-center">
           <div>
-            <Logo lang="eng" />
+            <Logo />
           </div>
-          <GiHamburgerMenu fontSize={24} className="cursor-pointer block lg:hidden" onClick={() => setIsOpen(!isOpen)} />
+          <GiHamburgerMenu fontSize={24} className={`${isOpen ? "hidden" : "block"} cursor-pointer block lg:hidden `} onClick={openNav} />
+          <ImCross fontSize={20} className={`${isOpen ? "block" : "hidden"} cursor-pointer block lg:hidden`} onClick={closeNav} />
           <div className={`nav-item-container ${isOpen ? "max-h-screen" : "max-h-0 py-0"}`}>
             <NavbarLI to="/" primary={text.home[prefLang]} className="font-extrabold text-purple-600" />
             <NavbarLI to="/aboutus" primary={text.aboutUs[prefLang]} />
