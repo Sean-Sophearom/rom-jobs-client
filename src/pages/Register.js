@@ -20,14 +20,14 @@ const inputClass =
 const Register = () => {
   const [showPw, setShowPw] = React.useState(false);
   const [radio, setRadio] = React.useState("");
-  const [input, setInput] = React.useState({ username: "", password: "" });
+  const [input, setInput] = React.useState({ name: "", password: "" });
   const dispatch = useDispatch();
-  const { error } = useSelector(selectUser);
+  const { error, loading } = useSelector(selectUser);
   const history = useHistory();
 
   useEffect(() => {
     dispatch(clearAllError());
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -36,16 +36,16 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (!input.username) return dispatch(setError({ errorType: "username", data: "Please fill in your username." }));
+    if (!input.name) return dispatch(setError({ errorType: "name", data: "Please fill in your name." }));
     if (!input.password) return dispatch(setError({ errorType: "password", data: "Please fill in your password." }));
     if (!radio) setRadio("employee");
 
-    dispatch(signup({ userInfo: { username: input.username, password: input.password, accType: radio } }));
+    dispatch(signup({ userInfo: { name: input.name, password: input.password, accType: radio } }));
   };
 
   const togglePasswordVisibility = () => setShowPw(!showPw);
   return (
-    <>
+    <div className="animate-onLoadAnimation">
       <div className="box fixed top-0 ">
         <Logo />
       </div>
@@ -57,23 +57,23 @@ const Register = () => {
 
           <form>
             <div className="flex flex-col mt-4">
-              <label htmlFor="username" className="mb-2 text-lg">
-                Username
+              <label htmlFor="name" className="mb-2 text-lg">
+                Name
               </label>
               <Input
-                value={input.username}
+                value={input.name}
                 onChange={handleChange}
-                id="username"
-                name="username"
+                id="name"
+                name="name"
                 type="text"
                 className={inputClass}
-                placeholder="Enter your username"
-                error={error.username}
+                placeholder="Enter your name"
+                error={error.name}
               />
             </div>
 
             <div className="flex flex-col mt-4">
-              <label htmlFor="Password" className="mb-2 text-lg">
+              <label htmlFor="password" className="mb-2 text-lg">
                 Password
               </label>
               <Input
@@ -116,7 +116,7 @@ const Register = () => {
             </div>
 
             <div className="my-4 flex justify-center">
-              <Button type="submit" onClick={handleRegister}>
+              <Button type="submit" onClick={handleRegister} loading={loading} className="bg-purple-500">
                 Register
               </Button>
             </div>
@@ -124,7 +124,7 @@ const Register = () => {
             <div className="flex justify-center">
               <p className="text-gray-500">
                 Already a user?{" "}
-                <Link to="/login" className="text-purple-500 hover:text-purple-400 transition-all  underline">
+                <Link to="/login" className="text-purple-500 hover:text-purple-600 transition-all  underline">
                   Log In
                 </Link>
               </p>
@@ -132,7 +132,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

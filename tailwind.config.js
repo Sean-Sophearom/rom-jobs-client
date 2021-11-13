@@ -7,10 +7,20 @@ module.exports = {
       fontFamily: {
         sans: ["'Poppins'"],
       },
+      transitionProperty: {
+        height: "max-height",
+      },
+      keyframes: {
+        onLoadAnimation: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
+      animation: { onLoadAnimation: "onLoadAnimation 1.5s ease" },
     },
-  },
-  variants: {
-    extend: {},
+    variants: {
+      extend: {},
+    },
   },
   plugins: [],
 };

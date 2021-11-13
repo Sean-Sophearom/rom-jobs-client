@@ -4,6 +4,27 @@
 
 @layer components {
   .box {
-    @apply py-2 px-4 sm:px-8 md:py-4 md:px-16 lg:max-w-5xl xl:max-w-6xl lg:mx-auto;
+    @apply py-2 px-4 sm:px-8 md:py-4 md:px-8 lg:max-w-5xl xl:max-w-6xl lg:mx-auto;
   }
+  .nav-item-container {
+    @apply bg-indigo-50 lg:bg-gray-50 gap-8 items-center flex flex-col absolute top-12 md:top-16 py-6 lg:py-0 w-screen left-0 overflow-y-hidden transition-all duration-500
+    lg:static lg:max-h-screen lg:flex-row lg:w-auto lg:top-0 lg:overflow-visible;
+  }
+  .hero-img-slider-container {
+    @apply transition-all duration-500 lg:divide-x divide-solid divide-black p-4 sm:p-8 md:p-8 flex flex-col lg:flex-row gap-8 lg:gap-4 items-center;
+  }
+}
+
+/* @font-face {
+  font-family: jjjkkk;
+  src: url("https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+  unicode-range: U+1780;
+} */
+
+:lang(kh) {
+  font-family: "Battambang";
+}
+
+:lang(eng) {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }

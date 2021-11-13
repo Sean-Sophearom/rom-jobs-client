@@ -4,7 +4,7 @@ import axios from "../../axios";
 const initialState = {
   data: {},
   loading: false,
-  error: { username: null, password: null },
+  error: { name: null, password: null },
 };
 
 export const login = createAsyncThunk("user/login", async (data, thunkApi) => {
@@ -12,6 +12,7 @@ export const login = createAsyncThunk("user/login", async (data, thunkApi) => {
     const response = await axios.post("http://localhost:5000/api/auth/login", data.userInfo);
     return { user: response.data, rmbMe: data.rmbMe };
   } catch (error) {
+    console.log(error);
     throw thunkApi.rejectWithValue(error.response.data.message);
   }
 });
@@ -66,7 +67,7 @@ const userSlice = createSlice({
       if (payload.includes("password")) {
         state.error.password = payload;
       } else {
-        state.error.username = payload;
+        state.error.name = payload;
       }
     });
     //end of login reducers
@@ -81,7 +82,7 @@ const userSlice = createSlice({
     });
     builder.addCase(signup.rejected, (state, { payload }) => {
       state.loading = false;
-      state.error.username = payload;
+      state.error.name = payload;
     });
   },
 });

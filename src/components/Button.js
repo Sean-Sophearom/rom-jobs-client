@@ -1,15 +1,23 @@
 import React from "react";
-import { ImSpinner9 } from "react-icons/im";
+import { CgSpinner } from "react-icons/cg";
 
 let buttonStyle =
-  "bg-purple-500 hover:bg-purple-400 text-white px-4 py-1 rounded-sm content-box transition-all disabled:opacity-50 disabled:hover:bg-purple-500 flex justify-center items-center";
+  "text-white px-4 py-1 rounded-sm content-box transition-all disabled:opacity-50 disabled:hover:bg-purple-500 flex justify-center items-center";
 
 const Button = ({ type, onClick, className, children, loading }) => {
+  if (className?.includes("bg")) {
+    const bgColor = className
+      .split(" ")
+      .find((item) => item.includes("bg"))
+      .split("-")
+      .slice(1);
+    const hoverStyle = `hover:bg-${bgColor[0]}-${Number(bgColor[1]) + 100}`;
+    className = `${className} ${hoverStyle}`;
+  }
   className = className ? `${buttonStyle} ${className}` : buttonStyle;
-
   return (
     <button onClick={onClick} type={type} className={className} disabled={loading}>
-      <ImSpinner9 className={`animate-spin absolute ${!loading ? "hidden" : undefined}`} size={20} />
+      <CgSpinner className={`animate-spin absolute ${!loading ? "hidden" : undefined}`} size={20} />
       <span className={loading ? "invisible" : undefined}>{children}</span>
     </button>
   );
