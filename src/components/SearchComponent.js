@@ -112,10 +112,10 @@ const SearchComponent = () => {
         <div>
           <Searchbar buttonPos={buttonPos} />
         </div>
-        <div className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-5 ">
           {selectArray.map((select) => (
             <SelectComponent
-              className="transition-all duration-200 outline-none p-2 md:p-3 lg:p-4 border border-purple-300 rounded-md ring-0 focus-within:ring-2 ring-purple-500"
+              className="transition-all duration-200 bg-white outline-none p-2 md:p-3 lg:p-4 border border-purple-300 rounded-md ring-0 focus-within:ring-2 ring-purple-500"
               value={selectValues[select.name]}
               options={select.options}
               name={select.name}

@@ -93,9 +93,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* div to offset the fixed navbar */}
-      <div className="w-screen h-12 md:h-16"></div>
     </>
   );
 };
