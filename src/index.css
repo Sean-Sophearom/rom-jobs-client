@@ -6,6 +6,15 @@
   .box {
     @apply py-2 px-4 sm:px-8 md:py-4 md:px-8 lg:max-w-5xl xl:max-w-6xl lg:mx-auto;
   }
+  .h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  .main-bg {
+    @apply bg-blue-50;
+  }
+  .btn {
+    @apply bg-purple-500 text-white disabled:bg-gray-400 disabled:text-gray-600 px-2 py-1 rounded-sm hover:scale-110 transition-all disabled:hover:scale-100;
+  }
   .nav-item-container {
     @apply bg-indigo-50 lg:bg-gray-50 gap-8 items-center flex flex-col absolute top-12 md:top-16 py-6 lg:py-0 w-screen left-0 overflow-y-hidden transition-all duration-500
     lg:static lg:max-h-screen lg:flex-row lg:w-auto lg:top-0 lg:overflow-visible;

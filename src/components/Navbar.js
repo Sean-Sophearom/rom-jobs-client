@@ -18,21 +18,22 @@ import { ImCross } from "react-icons/im";
 //react router
 import { useHistory } from "react-router-dom";
 
-const text = {
-  home: { kh: "ទំព័រដើម", eng: "Home" },
-  aboutUs: { kh: "អំពីយើង", eng: "About Us" },
-  jobs: { kh: "ការងារ", eng: "Jobs" },
-  contact: { kh: "ទាក់ទង", eng: "Contact" },
-  login: { kh: "ចូលគណនី", eng: "Login" },
-  register: { kh: "ចុះឈ្មោះ", eng: "Register" },
-  toggleLangText: { kh: "ផ្លាស់ប្តូរភាសា", eng: "Toggle Language" },
-};
-
 const Navbar = () => {
   const prefLang = useSelector((state) => state.prefLang);
+  const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
+
+  const text = {
+    home: { kh: "ទំព័រដើម", eng: "Home" },
+    aboutUs: { kh: "អំពីយើង", eng: "About Us" },
+    jobs: user.acc_type === "employer" ? { kh: "បង្កើតការងារ", eng: "Add Job" } : { kh: "ការងារ", eng: "Jobs" },
+    contact: { kh: "ទាក់ទង", eng: "Contact" },
+    login: { kh: "ចូលគណនី", eng: "Login" },
+    register: { kh: "ចុះឈ្មោះ", eng: "Register" },
+    toggleLangText: { kh: "ផ្លាស់ប្តូរភាសា", eng: "Toggle Language" },
+  };
 
   useEffect(() => {
     if (window.innerWidth < 1024) {
@@ -70,7 +71,7 @@ const Navbar = () => {
     </div>
   );
   return (
-    <>
+    <div lang={prefLang}>
       <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-screen top-0 z-50">
         <div className="box flex justify-between items-center">
           <div>
@@ -79,9 +80,9 @@ const Navbar = () => {
           <GiHamburgerMenu fontSize={24} className={`${isOpen ? "hidden" : "block"} cursor-pointer block lg:hidden `} onClick={openNav} />
           <ImCross fontSize={20} className={`${isOpen ? "block" : "hidden"} cursor-pointer block lg:hidden`} onClick={closeNav} />
           <div className={`nav-item-container ${isOpen ? "max-h-screen" : "max-h-0 py-0"}`}>
-            <NavbarLI to="/" primary={text.home[prefLang]} className="font-extrabold text-purple-600" />
+            <NavbarLI to="/" primary={text.home[prefLang]} />
             <NavbarLI to="/aboutus" primary={text.aboutUs[prefLang]} />
-            <NavbarLI to="/jobs" primary={text.jobs[prefLang]} />
+            <NavbarLI to={user?.acc_type === "employer" ? "/createjob" : "/jobs"} primary={text.jobs[prefLang]} />
             <NavbarLI to="/contact" primary={text.contact[prefLang]} />
             <LanguageComponent />
             <Button onClick={() => history.push("/login")} className="bg-red-500 hover:scale-110 font-semibold px-2 py-[2px]">
@@ -93,7 +94,10 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </>
+
+      {/* div to offset the fixed navbar */}
+      <div className="h-[48px] md:h-[64px]"></div>
+    </div>
   );
 };
 

@@ -12,7 +12,8 @@ import { getLangFromLocal } from "./redux/slices/languageSlice";
 //components
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
+import Home from "./pages/home/";
+import CreateJob from "./pages/createJob/";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/createjob" component={CreateJob} />
       </Switch>
     </Router>
   );
