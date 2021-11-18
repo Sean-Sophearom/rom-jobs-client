@@ -1,7 +1,7 @@
 const spring = {
   id: 0,
   name: "Java/Spring",
-  desc: [
+  resp: [
     "Develop Backend Applications for internal and external usage.",
     "Maintenance and fix bugs on the existing applications.",
     "Work in cross functional teams to find solution to any problem as required.",
@@ -21,7 +21,7 @@ const spring = {
 const vue = {
   id: 1,
   name: "Vue.Js",
-  desc: [
+  resp: [
     "Developing user-facing applications using Vue.js",
     "Building modular and reusable components and libraries",
     "Optimizing your application for performance",
@@ -41,7 +41,7 @@ const vue = {
 const react = {
   id: 2,
   name: "React.Js",
-  desc: [
+  resp: [
     "Developing user-facing applications using React.js",
     "Building modular and reusable components and libraries",
     "Optimizing your application for performance",
@@ -71,7 +71,7 @@ const react = {
 const backend = {
   id: 3,
   name: "Backend (Java, Node)",
-  desc: [
+  resp: [
     "Develop API for internal and external usage",
     "Maintenance and fix bugs on the existing API services",
     "Work in cross-functional teams to analyze, design & plan on new API",
@@ -94,7 +94,7 @@ const backend = {
 const frontend = {
   id: 4,
   name: "Frontend (React, Angular, Vue)",
-  desc: [
+  resp: [
     "Bachelor’s degree in Computer Science of Information Technology",
     "Minimum 1 years of experience in Web development",
     "Proficiency in HTML/XHTML/CSS. ",

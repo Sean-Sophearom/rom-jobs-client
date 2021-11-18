@@ -72,7 +72,7 @@ const Navbar = () => {
   );
   return (
     <div lang={prefLang}>
-      <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-screen top-0 z-50">
+      <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-screen top-0 z-50 shadow-md">
         <div className="box flex justify-between items-center">
           <div>
             <Logo />
