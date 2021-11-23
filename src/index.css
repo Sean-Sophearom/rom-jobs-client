@@ -17,7 +17,7 @@
   }
   .input,
   .select {
-    @apply w-full transition-all outline-none px-3 py-2 bg-white border-gray-300 focus-within:ring-1 focus-within:rounded-sm focus-within:border-0 ring-purple-700 border-b-2;
+    @apply w-full transition-all outline-none px-2 py-1 sm:px-3 sm:py-2 bg-white border-gray-300 focus-within:ring-1 focus-within:rounded-sm ring-purple-700 border-b-2 focus-within:border-white;
   }
 
   /* .select {

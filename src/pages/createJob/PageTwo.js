@@ -3,6 +3,7 @@ import img_arr from "../../static/img_import";
 import { TiTick } from "react-icons/ti";
 import Radio from "../../components/Radio";
 import Snackbar from "../../components/Snackbar";
+import TextareaAutosize from "react-textarea-autosize";
 
 const industries = [
   "Banking & Finance",
@@ -37,22 +38,55 @@ const categories = [
   "Digital Marketing",
 ];
 
+const locations = ["Phnom Penh", "Remote", "Location unlimited"];
+
 const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
   const chooseImg = (imgIndex) => setNewJob({ ...newJob, img: imgIndex });
   const handleChange = (e) => setNewJob({ ...newJob, [e.target.name]: e.target.value });
   const [isOpen, setIsOpen] = useState(false);
 
+  const hasFilledIn = () => {
+    const areaToCheck = [
+      "name",
+      "category",
+      "description",
+      "gender",
+      "industry",
+      "job_type",
+      "age",
+      "language",
+      "level",
+      "location",
+      "qualification",
+      "salary",
+      "required_skills",
+      "available_position",
+    ];
+    for (const inputArea of areaToCheck) {
+      if (!newJob[inputArea]) return false;
+    }
+    return true;
+  };
+
   //check if there is a draft in localstorage
   useEffect(() => {
-    if (newJob.salary) setTimeout(() => setIsOpen(true), 1000);
+    if (newJob.salary) {
+      const myTimeout = setTimeout(() => setIsOpen(true), 1000);
+      return () => {
+        clearTimeout(myTimeout);
+      };
+    }
   }, []);
+
   return (
-    <div lang="eng" className="bg-white rounded-md p-2 md:p-4 lg:p-6 animate-onLoadAnimation">
+    <div lang="eng" className="animate-onLoadAnimation">
       <Snackbar open={isOpen} close={() => setIsOpen(false)} timeout={6000} color="green">
         Your draft has been restored.
       </Snackbar>
       <div className="flex justify-center pb-4">
-        <h1 className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">Create a new Job</h1>
+        <h1 id="title" className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">
+          Create a new Job
+        </h1>
       </div>
 
       <div className="flex flex-col gap-6">
@@ -86,9 +120,47 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
           </div>
 
           <div className="py-2">
+            <h4 className="text-lg font-semibold">Enter Job available position:</h4>
+            <h5 className="text-sm text-gray-500 mb-2">ex: 1 or 2...</h5>
+            <input
+              type="number"
+              min="1"
+              className="input"
+              placeholder="job available position..."
+              name="available_position"
+              value={newJob.available_position}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="py-2">
             <h4 className="text-lg font-semibold">Enter Job description:</h4>
             <h5 className="text-sm text-gray-500 mb-2">enter a short paragraph describing the job.</h5>
-            <input className="input" placeholder="description..." name="description" value={newJob.description} onChange={handleChange} />
+            <TextareaAutosize
+              className="input"
+              placeholder="description..."
+              name="description"
+              value={newJob.description}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="py-2">
+            <h4 className="text-lg font-semibold">Enter Job required skills:</h4>
+            <h5 className="text-sm text-gray-500 mb-2">ex: React, MySQL, Node, Express...</h5>
+            <TextareaAutosize
+              className="input"
+              placeholder="required skills..."
+              name="required_skills"
+              value={newJob.required_skills}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="py-2">
+            <h4 className="text-lg font-semibold">Enter Job Age:</h4>
+            <h5 className="text-sm text-gray-500 mb-2">enter the minimum age required for the job.</h5>
+            <input type="number" className="input" placeholder="minimum age..." name="age" value={newJob.age} onChange={handleChange} />
           </div>
 
           <div className="py-2">
@@ -103,6 +175,17 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="py-2">
+            <h4 className="text-lg font-semibold mb-2">Choose the Job location:</h4>
+            <select className="select" name="location" value={newJob.location} onChange={handleChange}>
+              {locations.map((location) => (
+                <option key={location} value={location}>
+                  {location}
                 </option>
               ))}
             </select>
@@ -205,9 +288,16 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
       </div>
 
       <div className="flex justify-between items-center p-2 mt-4" lang="eng">
-        <PrevPageBtn />
+        <PrevPageBtn to="1" />
         <p className="text-lg">2/4</p>
-        <NextPageBtn />
+        <div className="relative flex justify-end items-center group">
+          <NextPageBtn to="3" disabled={!hasFilledIn()} />
+          {!hasFilledIn() && (
+            <p className="absolute whitespace-nowrap bg-gray-600 text-gray-100 rounded-sm text-sm px-2 py-1 bottom-10 scale-0 group-hover:scale-100 transition-all">
+              Please fill in all the areas!
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const SingleJob = ({ job, index, chosenTemplate, setChosenTemplate }) => {
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
   return (
-    <div key={job.id} className="bg-white rounded-md">
+    <div key={job.id} className="bg-white first:rounded-t-md last:rounded-b-md">
       <div className="flex items-center pl-2 sm:pl-4">
         <Radio checked={chosenTemplate === index} onClick={() => setChosenTemplate(job, index)} className="text-red-500" />
         <div onClick={toggleIsOpen} className="flex items-center justify-between gap-2 p-2 sm:p-3 md:p-4 flex-1 cursor-pointer">
@@ -65,10 +65,17 @@ const PageOne = ({ NextPageBtn, PrevPageBtn, setNewJob }) => {
 
   const chooseTemplate = (jobTemplate, index) => {
     setChosenTemplate(index);
-    setNewJob((prev) => ({ ...prev, name: jobTemplate.name, responsibilities: jobTemplate.resp, requirements: jobTemplate.req }));
+    setNewJob((prev) => ({
+      ...prev,
+      name: jobTemplate.name,
+      responsibilities: jobTemplate.resp,
+      requirements: jobTemplate.req,
+      required_skills: jobTemplate.skills,
+    }));
   };
+
   return (
-    <div lang={prefLang} className="bg-white rounded-md p-2 md:p-4 lg:p-6 animate-onLoadAnimation">
+    <div lang={prefLang} className="animate-onLoadAnimation">
       <div className="flex justify-center">
         <h1 className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">{text.createANewJob[prefLang]}</h1>
       </div>
@@ -98,10 +105,12 @@ const PageOne = ({ NextPageBtn, PrevPageBtn, setNewJob }) => {
         </>
       )}
 
-      <div className="flex justify-between items-center p-2 mt-4" lang="eng">
-        <PrevPageBtn disabled={true} />
+      <div className="flex justify-between items-center py-2 mt-4" lang="eng">
+        <div className="opacity-0">
+          <PrevPageBtn disabled={true} to="0" />
+        </div>
         <p className="text-lg">1/4</p>
-        <NextPageBtn disabled={template !== false && chosenTemplate === null} />
+        <NextPageBtn disabled={template !== false && chosenTemplate === null} to="2" />
       </div>
     </div>
   );

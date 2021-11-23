@@ -84,7 +84,7 @@ export const HeroImageOne = ({ index }) => {
         <p className="text-lg font-semibold">{text.jobAnnouncement.desc[prefLang]}</p>
         <CTAButton text={text.jobAnnouncement.btnTxt[prefLang]} to="/jobs" />
       </div>
-      <img src={webDevImg} className="lg:w-[400px] w-[300px] pl-4" />
+      <img src={webDevImg} className="lg:w-[400px] w-[300px] pl-4" alt="decorative img" />
     </div>
   );
 };
@@ -110,7 +110,7 @@ export const HeroImageTwo = ({ index }) => {
         <p className="text-lg font-semibold">{text.whyUs.desc[prefLang]}</p>
         <CTAButton text={text.whyUs.btnTxt[prefLang]} to="/register" />
       </div>
-      <img src={jobImgTwo} className="lg:w-[400px] w-[300px] pl-4" />
+      <img src={jobImgTwo} className="lg:w-[400px] w-[300px] pl-4" alt="decorative img" />
     </div>
   );
 };
@@ -136,7 +136,7 @@ export const HeroImageThree = ({ index }) => {
         <p className="text-lg font-semibold">{text.aboutUs.desc[prefLang]}</p>
         <CTAButton text={text.aboutUs.btnTxt[prefLang]} to="/about" />
       </div>
-      <img src={jobImgOne} className="lg:w-[400px] w-[300px] pl-4 " />
+      <img src={jobImgOne} className="lg:w-[400px] w-[300px] pl-4 " alt="decorative img" />
     </div>
   );
 };

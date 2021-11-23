@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className={`nav-item-container ${isOpen ? "max-h-screen" : "max-h-0 py-0"}`}>
             <NavbarLI to="/" primary={text.home[prefLang]} />
             <NavbarLI to="/aboutus" primary={text.aboutUs[prefLang]} />
-            <NavbarLI to={user?.acc_type === "employer" ? "/createjob" : "/jobs"} primary={text.jobs[prefLang]} />
+            <NavbarLI to={user?.acc_type === "employer" ? "/createjob/1" : "/jobs"} primary={text.jobs[prefLang]} />
             <NavbarLI to="/contact" primary={text.contact[prefLang]} />
             <LanguageComponent />
             <Button onClick={() => history.push("/login")} className="bg-red-500 hover:scale-110 font-semibold px-2 py-[2px]">

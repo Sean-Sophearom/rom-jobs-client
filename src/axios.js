@@ -9,7 +9,7 @@ instance.interceptors.request.use(function (req) {
 
   if (user) {
     const { token } = JSON.parse(localStorage.getItem("user"));
-    req.headers.authorization = `Bearer ${token}`;
+    req.headers.authorization = `BEARER ${token}`;
     return req;
   }
 
@@ -19,7 +19,7 @@ instance.interceptors.request.use(function (req) {
 
   if (user) {
     const { token } = JSON.parse(sessionStorage.getItem("user"));
-    req.headers.authorization = `Bearer ${token}`;
+    req.headers.authorization = `BEARER ${token}`;
     return req;
   }
   return req;

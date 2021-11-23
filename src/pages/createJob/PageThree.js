@@ -37,7 +37,7 @@ const TagComponent = ({ primary, setNewJob, newJob }) => {
       setIsChosen(true);
     }
   };
-  const className = `cursor-pointer transition-all rounded-full border-2 text-center block w-full py-1 md:py-2 ${
+  const className = `cursor-pointer transition-all rounded-full border-2 text-center inline-block py-1 px-3 mx-1 my-1 ${
     isChosen ? "bg-purple-500 text-white" : newJob.tags.length < 5 ? "border-purple-500" : "border-gray-300 text-gray-600"
   }`;
   return (
@@ -114,7 +114,6 @@ const ResComponent = ({ primary, index, editRes, setEditRes, setNewJob, newJob }
 };
 
 const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
-  console.log(newJob);
   const [editReq, setEditReq] = useState(-1);
   const [editRes, setEditRes] = useState(-1);
   const [newReq, setNewReq] = useState("");
@@ -132,24 +131,37 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
     setNewRes("");
   };
   return (
-    <div lang="eng" className="bg-white rounded-md p-2 md:p-4 lg:p-6 animate-onLoadAnimation">
+    <div lang="eng" className="animate-onLoadAnimation">
       <div className="flex justify-center pb-4">
-        <h1 className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">Create a new Job</h1>
+        <h1 id="title" className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">
+          Create a new Job
+        </h1>
       </div>
 
       <section className="flex flex-col gap-4">
         <div className="py-2">
           <h4 className="text-lg font-semibold">Choose tags</h4>
           <h5 className="text-sm text-gray-500 mb-4">You may choose up to five tags.</h5>
-          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4">
+          <div>
             {tags.map((tag) => (
               <TagComponent primary={tag} key={tag} newJob={newJob} setNewJob={setNewJob} />
             ))}
           </div>
         </div>
 
+        {/* <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4"> */}
+
         <div className="py-2">
           <h4 className="text-lg font-semibold">Job requirements</h4>
+          <div>
+            <h5 className="text-sm text-gray-700">Add a new requirement</h5>
+            <form onSubmit={addNewReq} className="flex flex-col sm:flex-row justify-center gap-2">
+              <input value={newReq} onChange={(e) => setNewReq(e.target.value)} className="input" placeholder="new requirement..." />
+              <button type="submit" disabled={!newReq} className="btn self-center sm:self-stretch px-6 sm:px-8">
+                add
+              </button>
+            </form>
+          </div>
           <div className="flex flex-col gap-3">
             {newJob.requirements.map((req, index) => (
               <ReqComponent
@@ -163,19 +175,19 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
               />
             ))}
           </div>
-          <div>
-            <h5 className="text-sm text-gray-700 mb-1">Add a new requirement</h5>
-            <form onSubmit={addNewReq} className="flex flex-col sm:flex-row justify-center gap-2">
-              <input value={newReq} onChange={(e) => setNewReq(e.target.value)} className="input" placeholder="new requirement..." />
-              <button type="submit" disabled={!newReq} className="btn self-center sm:self-stretch px-6 sm:px-8">
-                add
-              </button>
-            </form>
-          </div>
         </div>
 
         <div className="py-2">
           <h4 className="text-lg font-semibold">Job responsibilities</h4>
+          <div>
+            <h5 className="text-sm text-gray-700">Add a new responsibility</h5>
+            <form onSubmit={addNewRes} className="flex flex-col sm:flex-row justify-center gap-2">
+              <input value={newRes} onChange={(e) => setNewRes(e.target.value)} className="input" placeholder="new responsibility..." />
+              <button type="submit" disabled={!newRes} className="btn self-center sm:self-stretch px-6 sm:px-8">
+                add
+              </button>
+            </form>
+          </div>
           <div className="flex flex-col gap-3">
             {newJob.responsibilities.map((res, index) => (
               <ResComponent
@@ -189,22 +201,13 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
               />
             ))}
           </div>
-          <div>
-            <h5 className="text-sm text-gray-700 mb-1">Add a new responsibility</h5>
-            <form onSubmit={addNewRes} className="flex flex-col sm:flex-row justify-center gap-2">
-              <input value={newRes} onChange={(e) => setNewRes(e.target.value)} className="input" placeholder="new responsibility..." />
-              <button type="submit" disabled={!newRes} className="btn self-center sm:self-stretch px-6 sm:px-8">
-                add
-              </button>
-            </form>
-          </div>
         </div>
       </section>
 
       <div className="flex justify-between items-center p-2 mt-4" lang="eng">
-        <PrevPageBtn />
+        <PrevPageBtn to="2" />
         <p className="text-lg">3/4</p>
-        <NextPageBtn />
+        <NextPageBtn to="4" />
       </div>
     </div>
   );
