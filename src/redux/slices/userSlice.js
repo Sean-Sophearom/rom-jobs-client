@@ -9,17 +9,16 @@ const initialState = {
 
 export const login = createAsyncThunk("user/login", async (data, thunkApi) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/auth/login", data.userInfo);
+    const response = await axios.post("/auth/login", data.userInfo);
     return { user: response.data, rmbMe: data.rmbMe };
   } catch (error) {
-    console.log(error);
     throw thunkApi.rejectWithValue(error.response.data.message);
   }
 });
 
 export const signup = createAsyncThunk("user/signup", async (data, thunkApi) => {
   try {
-    const response = await axios.post(`/auth/register`, data.userInfo);
+    const response = await axios.post("/auth/register", data.userInfo);
     return { user: response.data };
   } catch (error) {
     throw thunkApi.rejectWithValue(error.response.data.message);

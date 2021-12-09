@@ -13,11 +13,48 @@
     @apply bg-blue-50;
   }
   .btn {
-    @apply bg-purple-500 text-white disabled:bg-gray-400 disabled:text-gray-600 px-2 py-1 rounded-sm hover:scale-110 transition-all disabled:hover:scale-100 disabled:cursor-default;
+    @apply flex gap-2 items-center bg-purple-500 text-white disabled:bg-gray-400 disabled:text-gray-600 px-2 py-1 rounded-sm hover:scale-110 transition-all disabled:hover:scale-100 disabled:cursor-default;
   }
   .input,
   .select {
     @apply w-full transition-all outline-none px-2 py-1 sm:px-3 sm:py-2 bg-white border-gray-300 focus-within:ring-1 focus-within:rounded-sm ring-purple-700 border-b-2 focus-within:border-white;
+  }
+
+  .navbar-user-li {
+    @apply px-3 py-1 hover:bg-purple-600 hover:text-white transition-all flex items-center gap-2;
+  }
+
+  .navbar-user-li:lang(kh) {
+    @apply text-sm;
+  }
+
+  .cv-grid-container {
+    @apply border-t border-gray-300 pt-6 pb-10 grid grid-cols-1 gap-y-6 gap-x-10 lg:grid-cols-2;
+  }
+
+  .cv-input-label {
+    @apply mb-2 block text-sm text-gray-600;
+  }
+
+  .cv-input {
+    @apply outline-none transition-all px-2 py-[6px] border border-gray-300 rounded-sm w-full focus:ring-2 focus:ring-purple-400 text-gray-700;
+  }
+
+  .display-cv-header {
+    @apply text-purple-600 font-semibold text-2xl mb-4;
+  }
+
+  .display-cv-grid {
+    @apply border-t border-gray-300 text-sm xs:text-base py-4 grid gap-y-4 gap-x-10 grid-cols-1 md:grid-cols-2;
+  }
+
+  .cv-text {
+    @apply font-semibold;
+    font-family: "Poppins", Arial, Helvetica, sans-serif !important;
+  }
+
+  select.cv-input {
+    @apply px-[1px];
   }
 
   /* .select {
@@ -42,6 +79,9 @@
   font-family: "Battambang";
 }
 
-:lang(eng) {
+:lang(eng),
+input:lang(kh),
+select:lang(kh),
+option:lang(kh) {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
 }

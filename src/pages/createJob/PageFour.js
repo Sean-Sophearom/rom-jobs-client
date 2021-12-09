@@ -6,7 +6,7 @@ import axios from "../../axios";
 const PageFour = ({ PrevPageBtn, newJob }) => {
   const postJob = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/job", newJob);
+      const response = await axios.post("/job", newJob);
       localStorage.removeItem("jobDraft");
       console.log(response);
     } catch (err) {

@@ -23,7 +23,6 @@ const Register = () => {
   const [input, setInput] = React.useState({ name: "", password: "" });
   const dispatch = useDispatch();
   const { error, loading } = useSelector(selectUser);
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(clearAllError());

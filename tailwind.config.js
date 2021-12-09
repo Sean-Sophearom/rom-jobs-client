@@ -19,6 +19,10 @@ module.exports = {
         },
       },
       animation: { onLoadAnimation: "onLoadAnimation 1.5s ease" },
+      backgroundImage: {
+        "business-man": "url('/src/static/business_man.jpg')",
+        cv: "url('/src/static/bg_cv.jpg')",
+      },
     },
     variants: {
       extend: {},

@@ -1,6 +1,7 @@
 const spring = {
   id: 0,
   name: "Java/Spring",
+  tags: ["Java", "Spring", "Rest"],
   resp: [
     "Develop Backend Applications for internal and external usage.",
     "Maintenance and fix bugs on the existing applications.",
@@ -21,6 +22,7 @@ const spring = {
 const vue = {
   id: 1,
   name: "Vue.Js",
+  tags: ["Vue", "HTML", "Frontend"],
   skills: "Vue, CSS, HTML, JavaScript",
   resp: [
     "Developing user-facing applications using Vue.js",
@@ -42,6 +44,7 @@ const vue = {
 const react = {
   id: 2,
   name: "React.Js",
+  tags: ["React", "Redux", "CSS"],
   skills: "React, Redux, Flux, CSS, HTML, JavaScript",
   resp: [
     "Developing user-facing applications using React.js",
@@ -74,6 +77,8 @@ const backend = {
   id: 3,
   name: "Backend (Java, Node)",
   skills: "Java, Node, Api, Rest, Soap",
+  tags: ["Java", "Node", "Rest"],
+
   resp: [
     "Develop API for internal and external usage",
     "Maintenance and fix bugs on the existing API services",
@@ -97,6 +102,7 @@ const backend = {
 const frontend = {
   id: 4,
   name: "Frontend (React, Angular, Vue)",
+  tags: ["Vue", "React", "Angular"],
   skills: "Vue, React, Angular, .Net Core, HTML, CSS, JavaScript",
   resp: [
     "Bachelor’s degree in Computer Science of Information Technology",
@@ -122,6 +128,8 @@ const frontend = {
 const seniorMobile = {
   id: 5,
   name: "Senior Mobile App Developer",
+  tags: ["Flutter", "React Native", "Android/Ios"],
+  skills: "Flutter, React Native, Ios, Android, Kotlin",
   resp: [
     "Develop client-side or server-side services and modules",
     "Develop and manage a well-functioning application",
@@ -150,7 +158,8 @@ const seniorMobile = {
 const juniorMobile = {
   id: 6,
   name: "Junior Mobile App Developer",
-  skills: "Hybrid, UI/UX, Agile",
+  tags: ["Flutter", "React Native", "Android/Ios"],
+  skills: "Flutter, React Native, Ios, Android, Kotlin, Hybrid, UI/UX, Agile",
   resp: [
     "Develop Mobile App, testing, Maintain, Troubleshoot, and enhance existing applications on one or more mobile platforms.",
     "Work closely with another member of the company",
@@ -172,6 +181,7 @@ const juniorMobile = {
 const uiux = {
   id: 7,
   name: "UI/UX Designer",
+  tags: ["Figma", "Adobe"],
   resp: [
     "Proven UI experience, graphic design experience, & demonstrable UI design skills with a portfolio",
     "Solid experience in wireframes, storyboards, user flows, process flows and site maps",
@@ -227,6 +237,7 @@ const seniorCSharp = {
   id: 9,
   name: "Senior C# Developer",
   skills: ".Net, OOP",
+  tags: [".Net", "c#", "MVC"],
   resp: [
     "In charge of developing all BEST software development to ensure that the quality of each release is accurate, efficient and on a timely basis (BEST solutions and partner solutions)",
     "Maintain all development intellectual documents such as TFS, and any related documents.",
@@ -287,6 +298,7 @@ const socialMedia = {
   id: 11,
   name: "Social Media Officer",
   skills: "editing, writing, consulting",
+  tags: ["Editing", "Facebook", "Social Media"],
   resp: [
     "Build and execute social media strategy through competitive research, platform determination, benchmarking, messaging, and audience identification",
     "Generate, edit, publish and share daily content (original text, images, video) that builds meaningful connections and encourages community members to take action",

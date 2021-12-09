@@ -14,6 +14,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/home/";
 import CreateJob from "./pages/createJob/";
+import Jobs from "./pages/jobs";
+import JobDetail from "./pages/jobDetail";
+import CreateCV from "./pages/createCV";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +31,9 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/createjob" component={CreateJob} />
+        <Route path="/jobs" component={Jobs} />
+        <Route path="/jobDetail/:id" component={JobDetail} />
+        <Route path="/cv" component={CreateCV} />
       </Switch>
     </Router>
   );

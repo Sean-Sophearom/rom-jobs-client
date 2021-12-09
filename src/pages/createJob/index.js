@@ -41,8 +41,9 @@ const CreateJob = () => {
 
   //upon loading, get the prev job from localstorage if exists
   useEffect(() => {
-    if (localStorage.getItem("jobDraft")) {
-      setNewJob(JSON.parse(localStorage.getItem("jobDraft")));
+    const jobDraft = JSON.parse(localStorage.getItem("jobDraft"));
+    if (jobDraft?.name) {
+      setNewJob(jobDraft);
       history.push("/createjob/2");
     }
   }, [history]);

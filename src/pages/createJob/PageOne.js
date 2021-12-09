@@ -39,7 +39,7 @@ const SingleJob = ({ job, index, chosenTemplate, setChosenTemplate }) => {
       <div className={`transition-all duration-300 overflow-y-hidden ${isOpen ? "max-h-[2000px]" : "max-h-0"}`}>
         <div className="p-2 sm:p-3 text-sm sm:text-base">
           <h4 className="text-purple-600 font-semibold">Responsibilities:</h4>
-          <ul className="list-disc flex flex-col gap-1 mt-2 ml-5">
+          <ul className="list-disc flex flex-col gap-1 mt-2 list-inside">
             {job.resp.map((resp) => (
               <li key={resp}>{resp}</li>
             ))}
@@ -47,7 +47,7 @@ const SingleJob = ({ job, index, chosenTemplate, setChosenTemplate }) => {
         </div>
         <div className="p-2 sm:p-3 text-sm sm:text-base">
           <h4 className="text-purple-600 font-semibold">Requirements:</h4>
-          <ul className="list-disc flex flex-col gap-1 mt-2 ml-5">
+          <ul className="list-disc flex flex-col gap-1 mt-2 list-inside">
             {job.req.map((req) => (
               <li key={req}>{req}</li>
             ))}

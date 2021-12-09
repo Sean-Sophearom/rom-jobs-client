@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { MdOutlineEdit } from "react-icons/md";
-import { TiTick } from "react-icons/ti";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 const tags = [

@@ -70,7 +70,7 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
 
   //check if there is a draft in localstorage
   useEffect(() => {
-    if (newJob.salary) {
+    if (localStorage.getItem("jobDraft")) {
       const myTimeout = setTimeout(() => setIsOpen(true), 1000);
       return () => {
         clearTimeout(myTimeout);
@@ -115,7 +115,7 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
 
           <div className="py-2">
             <h4 className="text-lg font-semibold">Enter Job salary:</h4>
-            <h5 className="text-sm text-gray-500 mb-2">ex: 1000$ ~ 1500$</h5>
+            <h5 className="text-sm text-gray-500 mb-2">ex: 1000$ ~ 1500$ or Negotiable</h5>
             <input className="input" placeholder="job salary..." name="salary" value={newJob.salary} onChange={handleChange} />
           </div>
 
@@ -166,7 +166,19 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
           <div className="py-2">
             <h4 className="text-lg font-semibold">Enter Job language:</h4>
             <h5 className="text-sm text-gray-500 mb-2">enter the prefered language for the job.</h5>
-            <input className="input" placeholder="prefered language..." name="language" value={newJob.language} onChange={handleChange} />
+            <input
+              list="language"
+              className="input"
+              placeholder="prefered language..."
+              name="language"
+              value={newJob.language}
+              onChange={handleChange}
+            />
+            <datalist id="language">
+              <option value="English" />
+              <option value="English Advance" />
+              <option value="Japan" />
+            </datalist>
           </div>
 
           <div className="py-2">

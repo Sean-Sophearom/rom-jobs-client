@@ -76,6 +76,8 @@ export const HeroImageOne = ({ index }) => {
     case 2:
       className = "translate-x-full opacity-0";
       break;
+    default:
+      console.log("something went wrong");
   }
   return (
     <div className={`hero-img-slider-container absolute ${className}`}>
@@ -102,6 +104,8 @@ export const HeroImageTwo = ({ index }) => {
     case 2:
       className = "-translate-x-full opacity-0";
       break;
+    default:
+      console.log("something went wrong");
   }
   return (
     <div className={`hero-img-slider-container absolute ${className}`}>
@@ -128,6 +132,8 @@ export const HeroImageThree = ({ index }) => {
     case 2:
       className = "translate-x-0";
       break;
+    default:
+      console.log("something went wrong");
   }
   return (
     <div className={`hero-img-slider-container ${className}`}>
