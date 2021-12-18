@@ -14,8 +14,7 @@ import { signup, clearAllError, clearError, setError, selectUser } from "../redu
 //react icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-const inputClass =
-  "text-sm text-gray-700 bg-gray-100 box-border p-2 ring-1 ring-purple-200 rounded-sm focus:outline-none  focus:ring-2 focus:ring-purple-500";
+const inputClass = "text-sm text-gray-700 bg-gray-100 box-border p-2 ring-1 ring-purple-200 rounded-sm focus:outline-none  focus:ring-2 focus:ring-purple-500";
 
 const Register = () => {
   const [showPw, setShowPw] = React.useState(false);
@@ -23,10 +22,18 @@ const Register = () => {
   const [input, setInput] = React.useState({ name: "", password: "" });
   const dispatch = useDispatch();
   const { error, loading } = useSelector(selectUser);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(clearAllError());
   }, [dispatch]);
+
+  useEffect(() => {
+    let user1 = localStorage.getItem("user");
+    let user2 = sessionStorage.getItem("user");
+
+    if (user1 || user2) history.push("/login");
+  });
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -39,7 +46,7 @@ const Register = () => {
     if (!input.password) return dispatch(setError({ errorType: "password", data: "Please fill in your password." }));
     if (!radio) setRadio("employee");
 
-    dispatch(signup({ userInfo: { name: input.name, password: input.password, accType: radio } }));
+    dispatch(signup({ userInfo: { name: input.name, password: input.password, accType: radio || "employee" } }));
   };
 
   const togglePasswordVisibility = () => setShowPw(!showPw);

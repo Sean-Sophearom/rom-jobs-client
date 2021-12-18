@@ -45,6 +45,11 @@ const userSlice = createSlice({
     setError: (state, { payload }) => {
       state.error[payload.errorType] = payload.data;
     },
+    clearUser: (state) => {
+      state.loading = false;
+      state.error = initialState.error;
+      state.data = initialState.data;
+    },
   },
   extraReducers: (builder) => {
     //start of login reducers
@@ -77,6 +82,7 @@ const userSlice = createSlice({
     });
     builder.addCase(signup.fulfilled, (state, { payload }) => {
       sessionStorage.setItem("user", JSON.stringify(payload.user));
+      state.data = payload.user;
       state.loading = false;
     });
     builder.addCase(signup.rejected, (state, { payload }) => {
@@ -91,6 +97,6 @@ export const selectUser = createSelector(
   (state) => state
 );
 
-export const { getUserFromStorage, clearAllError, clearError, setError } = userSlice.actions;
+export const { getUserFromStorage, clearAllError, clearError, setError, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

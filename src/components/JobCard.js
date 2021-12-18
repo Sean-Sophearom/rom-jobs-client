@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import wp_img from "../static/img_import";
 import { MdLocationPin } from "react-icons/md";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "../axios";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { showSnackbar } from "../redux/slices/snackbar";
 
 const JobCard = ({ job, paddingInline }) => {
+  const user = useSelector((state) => state.user.data);
   const isUrgent = job.job_id % 4 === 0;
   const [isFavorite, setIsFavorite] = useState(job.favorite);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const toggleFav = async () => {
+    if (!user.token) history.push("/login") || dispatch(showSnackbar({ msg: "Please log in first.", color: "red" }));
     setLoading(true);
     let apiLink;
     if (isFavorite) {
@@ -25,26 +31,20 @@ const JobCard = ({ job, paddingInline }) => {
         setIsFavorite(!isFavorite);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => setLoading(false) || history.push("/login"));
   };
+
   return (
     <div lang="eng" className={paddingInline ? "px-2" : null}>
-      <div className="rounded-md flex flex-col border border-gray-300 shadow-md">
+      <div className="rounded-md flex flex-col border border-gray-200 shadow-md">
         <div className="relative overflow-hidden rounded-t-md">
           <Link to={`/jobDetail/${job.job_id}`}>
             <img src={wp_img[job.img].src} alt={wp_img[job.img].alt} className="hover:scale-110 transition-all duration-500" />
           </Link>
 
           <span className="text-sm py-[1px] px-1 bg-white absolute z-10 bottom-3 ml-3">{job.industry}</span>
-          {isUrgent && (
-            <div className="absolute bg-indigo-700 z-10 top-4 -right-7 text-white px-8 py-[1px] text-sm rotate-45 font-semibold">
-              Urgent
-            </div>
-          )}
-          <div
-            title={isFavorite ? "Remove from my Favorite Jobs" : "Add to My Favorite Jobs"}
-            className="absolute z-10 top-3 left-3 cursor-pointer"
-          >
+          {isUrgent && <div className="absolute bg-indigo-700 z-10 top-4 -right-7 text-white px-8 py-[1px] text-sm rotate-45 font-semibold">Urgent</div>}
+          <div title={isFavorite ? "Remove from my Favorite Jobs" : "Add to My Favorite Jobs"} className="absolute z-10 top-3 left-3 cursor-pointer">
             {loading ? (
               <AiOutlineLoading3Quarters fontSize={24} className="text-purple-600 animate-spin" />
             ) : isFavorite ? (
@@ -75,9 +75,11 @@ const JobCard = ({ job, paddingInline }) => {
                   </span>
                 ))}
               </div>
-              <div className="flex items-center">
-                <button className="btn text-sm bg-purple-600 rounded-sm">Apply Now!</button>
-              </div>
+              {user.acc_type !== "employer" && (
+                <div className="flex items-center">
+                  <button className="btn text-sm bg-purple-600 rounded-sm">Apply Now!</button>
+                </div>
+              )}
             </div>
           </div>
         </Link>

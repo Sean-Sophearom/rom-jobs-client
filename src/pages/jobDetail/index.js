@@ -8,24 +8,32 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Carousel from "./Carousel";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "../../axios";
 import Button from "../../components/Button";
+import { showSnackbar } from "../../redux/slices/snackbar";
 
 const Index = () => {
   const { id } = useParams();
   const history = useHistory();
   const [isFav, setIsFav] = useState({ loading: false, state: false });
   const [job, loading, notFound] = useFetchJob(id);
+  const [applied, setApplied] = useState({ loading: false, state: false });
   const user = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const { isFavorite } = job;
     if (isFavorite) setIsFav((prev) => ({ ...prev, state: true }));
+    if (!isFavorite) setIsFav((prev) => ({ ...prev, state: false }));
+
+    const { applied } = job;
+    if (applied) setApplied((prev) => ({ ...prev, state: true }));
+    if (!applied) setApplied((prev) => ({ ...prev, state: false }));
   }, [job]);
 
   const toggleFav = () => {
-    if (!user.user_id) return history.push("/login");
+    if (!user.user_id) return history.push("/login") || dispatch(showSnackbar({ msg: "Please log in first.", color: "red" }));
 
     const id = job.job_id;
 
@@ -42,6 +50,22 @@ const Index = () => {
         .then(() => setIsFav({ state: false, loading: false }))
         .catch(() => setIsFav({ state: true, loading: false }));
     }
+  };
+
+  const applyJob = () => {
+    if (!user.name) return history.push("/login") || dispatch(showSnackbar({ msg: "Please log in first.", color: "red" }));
+
+    setApplied((prev) => ({ ...prev, loading: true }));
+
+    axios
+      .post("/app", { job_id: id })
+      .then(() => setApplied({ state: true, loading: false }))
+      .catch(
+        (err) =>
+          setApplied({ state: false, loading: false }) ||
+          (err.response.data.code === "no_cv" && history.push("/cv")) ||
+          dispatch(showSnackbar({ msg: "Please create a curriculum vitae first.", color: "red" }))
+      );
   };
 
   if (loading) return <Loading />;
@@ -86,7 +110,15 @@ const Index = () => {
                   {isFav.state ? <FcLike className="hover:scale-110 transition-all" /> : <FcLikePlaceholder className="hover:scale-110 transition-all" />}
                 </div>
               </Button>
-              <button className="btn border border-indigo-600 bg-indigo-600">Apply Now</button>
+              {user.acc_type !== "employer" && (
+                <Button
+                  onClick={applyJob}
+                  disabled={applied.state}
+                  className="btn border border-indigo-600 disabled:border-none disabled:hover:bg-gray-400 bg-indigo-600"
+                  loading={applied.loading}>
+                  {applied.state ? "Applied" : "Apply Now"}
+                </Button>
+              )}
             </div>
           </div>
         </div>

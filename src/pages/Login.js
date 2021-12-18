@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 //components
 import Logo from "../components/Logo";
@@ -13,9 +13,9 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 //redux tk
 import { login, selectUser, setError, clearError, clearAllError } from "../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { showSnackbar } from "../redux/slices/snackbar";
 
-const inputClass =
-  "text-sm text-gray-700 bg-gray-100 box-border p-2 ring-1 ring-purple-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-purple-500";
+const inputClass = "text-sm text-gray-700 bg-gray-100 box-border p-2 ring-1 ring-purple-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-purple-500";
 
 const Login = () => {
   const { loading, error } = useSelector(selectUser);
@@ -24,10 +24,17 @@ const Login = () => {
   //open is for snackbar for when user fill in bad request
   const [input, setinput] = React.useState({ name: "", password: "" });
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(clearAllError());
   }, [dispatch]);
+
+  useEffect(() => {
+    let user1 = localStorage.getItem("user");
+    let user2 = sessionStorage.getItem("user");
+    if (user1 || user2) history.push("/") || dispatch(showSnackbar({ msg: "You have succesfully logged in.", color: "blue" }));
+  });
 
   const handleChange = (e) => {
     setinput({ ...input, [e.target.name]: e.target.value });
@@ -54,9 +61,7 @@ const Login = () => {
 
       <div className="h-screen grid place-items-center box">
         <div className="flex flex-col">
-          <h1 className="flex text-2xl sm:text-3xl md:text-4xl gap-2 px-5 justify-center">
-            Login To {<Logo fontSize="text-2xl sm:text-3xl md:text-4xl" />}
-          </h1>
+          <h1 className="flex text-2xl sm:text-3xl md:text-4xl gap-2 px-5 justify-center">Login To {<Logo fontSize="text-2xl sm:text-3xl md:text-4xl" />}</h1>
           <h2 className="text-gray-400 text-center md:text-lg mt-2 mb-1">Enter your details below</h2>
           <form>
             <div className="flex flex-col mt-4">

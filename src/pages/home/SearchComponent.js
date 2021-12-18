@@ -69,8 +69,7 @@ const SearchButton = ({ engText, khText }) => {
     <Link
       to="/jobs"
       onClick={choose}
-      className="transition-all w-full flex flex-col justify-center items-center p-2 py-4 sm:p-4 md:p-6 md:py-4 lg:p-4 lg:px-2 bg-purple-600 hover:bg-purple-700  lg:hover:scale-105 text-white text-sm sm:text-base rounded-md cursor-pointer"
-    >
+      className="transition-all w-full flex flex-col justify-center items-center p-2 py-4 sm:p-4 md:p-6 md:py-4 lg:p-4 lg:px-2 bg-purple-600 hover:bg-purple-700  lg:hover:scale-105 text-white text-sm sm:text-base rounded-md cursor-pointer">
       <p lang="kh">{khText}</p>
       <p lang="eng">{engText}</p>
     </Link>
@@ -89,11 +88,7 @@ const Searchbar = ({ buttonPos, submit, input, onChange }) => {
   return (
     <div className="flex w-full gap-2 lg:gap-4">
       <div className="flex flex-1 items-center bg-white relative rounded-md">
-        <BiSearch
-          onClick={submit}
-          className="absolute right-2 cursor-pointer transition-all hover:scale-125 hover:text-purple-500"
-          fontSize={24}
-        />
+        <BiSearch onClick={submit} className="absolute right-2" fontSize={24} />
         <input
           value={input}
           onChange={onChange}

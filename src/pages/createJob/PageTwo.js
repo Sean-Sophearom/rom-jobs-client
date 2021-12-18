@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import img_arr from "../../static/img_import";
 import { TiTick } from "react-icons/ti";
 import Radio from "../../components/Radio";
-import Snackbar from "../../components/Snackbar";
 import TextareaAutosize from "react-textarea-autosize";
+import { useDispatch } from "react-redux";
+import { showSnackbar } from "../../redux/slices/snackbar";
 
 const industries = [
   "Banking & Finance",
@@ -43,7 +44,7 @@ const locations = ["Phnom Penh", "Remote", "Location unlimited"];
 const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
   const chooseImg = (imgIndex) => setNewJob({ ...newJob, img: imgIndex });
   const handleChange = (e) => setNewJob({ ...newJob, [e.target.name]: e.target.value });
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const hasFilledIn = () => {
     const areaToCheck = [
@@ -71,18 +72,12 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
   //check if there is a draft in localstorage
   useEffect(() => {
     if (localStorage.getItem("jobDraft")) {
-      const myTimeout = setTimeout(() => setIsOpen(true), 1000);
-      return () => {
-        clearTimeout(myTimeout);
-      };
+      dispatch(showSnackbar({ msg: "Your draft has been restored.", color: "blue" }));
     }
   }, []);
 
   return (
     <div lang="eng" className="animate-onLoadAnimation">
-      <Snackbar open={isOpen} close={() => setIsOpen(false)} timeout={6000} color="green">
-        Your draft has been restored.
-      </Snackbar>
       <div className="flex justify-center pb-4">
         <h1 id="title" className="h1 text-purple-600 text-center py-4 bg-white rounded-sm border-b border-gray-200">
           Create a new Job
@@ -136,13 +131,7 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
           <div className="py-2">
             <h4 className="text-lg font-semibold">Enter Job description:</h4>
             <h5 className="text-sm text-gray-500 mb-2">enter a short paragraph describing the job.</h5>
-            <TextareaAutosize
-              className="input"
-              placeholder="description..."
-              name="description"
-              value={newJob.description}
-              onChange={handleChange}
-            />
+            <TextareaAutosize className="input" placeholder="description..." name="description" value={newJob.description} onChange={handleChange} />
           </div>
 
           <div className="py-2">
@@ -166,14 +155,7 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
           <div className="py-2">
             <h4 className="text-lg font-semibold">Enter Job language:</h4>
             <h5 className="text-sm text-gray-500 mb-2">enter the prefered language for the job.</h5>
-            <input
-              list="language"
-              className="input"
-              placeholder="prefered language..."
-              name="language"
-              value={newJob.language}
-              onChange={handleChange}
-            />
+            <input list="language" className="input" placeholder="prefered language..." name="language" value={newJob.language} onChange={handleChange} />
             <datalist id="language">
               <option value="English" />
               <option value="English Advance" />
@@ -233,10 +215,7 @@ const PageTwo = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
           <div className="py-2">
             <h4 className="text-lg font-semibold mb-2">Choose Gender type:</h4>
             <div className="flex items-center ml-2 gap-2 mt-1">
-              <Radio
-                checked={newJob.gender === "Female (Prefered)"}
-                onClick={() => setNewJob({ ...newJob, gender: "Female (Prefered)" })}
-              />
+              <Radio checked={newJob.gender === "Female (Prefered)"} onClick={() => setNewJob({ ...newJob, gender: "Female (Prefered)" })} />
               <p>Female (Prefered)</p>
             </div>
             <div className="flex items-center ml-2 gap-2 mt-1">

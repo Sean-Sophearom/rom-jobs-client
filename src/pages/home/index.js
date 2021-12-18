@@ -23,7 +23,7 @@ const Home = () => {
 
   if (loading) return <Loading />;
   return (
-    <Container className="animate-onLoadAnimation main-bg">
+    <Container>
       <ImageSlider />
       <SearchComponent />
       <Jobs />

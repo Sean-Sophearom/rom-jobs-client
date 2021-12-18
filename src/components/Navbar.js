@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleLang } from "../redux/slices/languageSlice";
 
 //component
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Logo from "./Logo";
 import NavbarLI from "./NavbarLI";
 
@@ -16,6 +16,8 @@ import { ImCross } from "react-icons/im";
 import { BiUserCircle, BiMessageAdd } from "react-icons/bi";
 import { BsPerson, BsGear, BsBookmark, BsFileEarmarkPdf } from "react-icons/bs";
 import { VscSignOut } from "react-icons/vsc";
+import { clearUser } from "../redux/slices/userSlice";
+import { showSnackbar } from "../redux/slices/snackbar";
 
 //react router
 // import { useHistory } from "react-router-dom";
@@ -24,6 +26,7 @@ const Navbar = () => {
   const prefLang = useSelector((state) => state.prefLang);
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
   const text = {
@@ -65,6 +68,14 @@ const Navbar = () => {
   const openNav = () => setIsOpen(true);
   const closeNav = () => setIsOpen(false);
 
+  const logout = () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    dispatch(clearUser());
+    window.location.pathname === "/" ? window.location.reload(false) : history.push("/");
+    dispatch(showSnackbar({ msg: "You have successfully signed out.", color: "blue" }));
+  };
+
   const LanguageComponent = () => (
     <div className="flex justify-center group relative hover:scale-110">
       <ReactCountryFlag
@@ -79,8 +90,7 @@ const Navbar = () => {
       />
       <p
         className="-bottom-6 px-1 py-[1px] bg-gray-500 text-white rounded-sm text-xs absolute scale-0 group-hover:scale-100 transition-all duration-75"
-        lang={prefLang === "eng" ? "kh" : "eng"}
-      >
+        lang={prefLang === "eng" ? "kh" : "eng"}>
         {text.toggleLangText[prefLang === "eng" ? "kh" : "eng"]}
       </p>
     </div>
@@ -88,7 +98,7 @@ const Navbar = () => {
 
   return (
     <div lang={prefLang}>
-      <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-screen top-0 z-50 shadow-md">
+      <div className="border-b bg-gray-50 border-gray-200 whitespace-nowrap fixed w-full top-0 z-50 shadow-md">
         <div className="box flex justify-between items-center">
           <div>
             <Logo />
@@ -103,7 +113,7 @@ const Navbar = () => {
             <LanguageComponent />
             {user.name ? (
               <div className="text-gray-500 cursor-pointer relative flex justify-center lg:justify-end xl:justify-center items-end group">
-                <BiUserCircle fontSize={28} className="transition-all group-hover:scale-110 group-hover:mb-40 lg:group-hover:mb-0" />
+                <BiUserCircle fontSize={28} className="transition-all text-purple-600 group-hover:scale-110 group-hover:mb-40 lg:group-hover:mb-0" />
                 <div className="transition-all absolute max-h-0 group-hover:max-h-96 overflow-hidden top-8 lg:top-7">
                   <ul className="border border-gray-400 rounded-sm bg-white text-black">
                     <li>
@@ -112,7 +122,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="navbar-user-li" to="/FavJobs">
+                      <Link className="navbar-user-li" to="/favJobs">
                         <BsBookmark /> {text.favJobs[prefLang]}
                       </Link>
                     </li>
@@ -124,7 +134,7 @@ const Navbar = () => {
                       </li>
                     ) : (
                       <li>
-                        <Link className="navbar-user-li" to="/createjob">
+                        <Link className="navbar-user-li" to="/createjob/1">
                           <BiMessageAdd /> {text.postJob[prefLang]}
                         </Link>
                       </li>
@@ -134,7 +144,7 @@ const Navbar = () => {
                         <BsGear /> {text.setting[prefLang]}
                       </Link>
                     </li>
-                    <li className="navbar-user-li">
+                    <li className="navbar-user-li" onClick={logout}>
                       <VscSignOut /> {text.signout[prefLang]}
                     </li>
                   </ul>

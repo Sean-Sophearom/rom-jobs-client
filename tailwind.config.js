@@ -22,6 +22,8 @@ module.exports = {
       backgroundImage: {
         "business-man": "url('/src/static/business_man.jpg')",
         cv: "url('/src/static/bg_cv.jpg')",
+        "cv-2": "url('/src/static/bg_cv_2.jpg')",
+        "job-application": "url('/src/static/online-application-job-form.jpeg')",
       },
     },
     variants: {
