@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "../../axios";
 import Button from "../../components/Button";
 import { showSnackbar } from "../../redux/slices/snackbar";
+import parseDate from "../../hooks/useParseDate";
 
 const Index = () => {
   const { id } = useParams();
@@ -34,8 +35,6 @@ const Index = () => {
 
   const toggleFav = () => {
     if (!user.user_id) return history.push("/login") || dispatch(showSnackbar({ msg: "Please log in first.", color: "red" }));
-
-    const id = job.job_id;
 
     setIsFav((prev) => ({ ...prev, loading: true }));
 
@@ -69,7 +68,7 @@ const Index = () => {
   };
 
   if (loading) return <Loading />;
-  if (notFound) return <Redirect to="/" />;
+  if (notFound) return <Redirect to="/404" />;
 
   return (
     <Container>
@@ -88,6 +87,7 @@ const Index = () => {
                 <span>Age: {job.age}</span>
                 <span>Level: {job.level} level</span>
                 <span>Gender: {job.gender}</span>
+                <span>Time posted: {parseDate(job.date_added, "fromNow")}</span>
               </div>
               <div className="flex flex-col gap-3 flex-1">
                 <span>Qualification: {job.qualification}</span>
@@ -96,6 +96,7 @@ const Index = () => {
                 <span>Location: {job.location}</span>
                 <span>Required Skills: {job.required_skills}</span>
                 <span>Available positons: {job.available_position} pax</span>
+                <span className="text-red-500">Current Status: {job.status}</span>
               </div>
             </div>
             <div className="flex md:justify-end items-end pt-4 gap-3">
@@ -113,7 +114,7 @@ const Index = () => {
               {user.acc_type !== "employer" && (
                 <Button
                   onClick={applyJob}
-                  disabled={applied.state}
+                  disabled={applied.state || job.status === "Closed"}
                   className="btn border border-indigo-600 disabled:border-none disabled:hover:bg-gray-400 bg-indigo-600"
                   loading={applied.loading}>
                   {applied.state ? "Applied" : "Apply Now"}

@@ -13,6 +13,8 @@ import { getLangFromLocal } from "./redux/slices/languageSlice";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/home/";
+import About from "./pages/about/";
+import Contact from "./pages/contact/";
 import CreateJob from "./pages/createJob/";
 import Jobs from "./pages/jobs";
 import JobDetail from "./pages/jobDetail";
@@ -43,6 +45,8 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/jobs" component={Jobs} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
           <Route path="/jobDetail/:id" component={JobDetail} />
           <ProtectedRoute path="/createjob" component={CreateJob} acc_type="employer" />
           <ProtectedRoute path="/cv" component={CreateCV} acc_type="employee" />

@@ -7,6 +7,8 @@ import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { showSnackbar } from "../redux/slices/snackbar";
+import { BiTimeFive } from "react-icons/bi";
+import parseDate from "../hooks/useParseDate";
 
 const JobCard = ({ job, paddingInline }) => {
   const user = useSelector((state) => state.user.data);
@@ -60,12 +62,21 @@ const JobCard = ({ job, paddingInline }) => {
               <span className="bg-purple-500 text-white py-1 px-2">{job.job_type}</span>
               <span>{job.salary}</span>
             </div>
-            <div className="flex gap-1 items-center text-sm my-2">
-              <MdLocationPin fontSize={22} />
-              <span>{job.location}</span>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-1 items-center text-sm my-2">
+                <MdLocationPin fontSize={22} />
+                <span>{job.location}</span>
+              </div>
+              <div className="flex gap-1 items-center text-sm my-2 text-gray-600">
+                <BiTimeFive />
+                <span>{parseDate(job.date_added, "fromNow")}</span>
+              </div>
             </div>
             <div>
               <h3 className="font-semibold">{job.name}</h3>
+            </div>
+            <div>
+              <span className="text-red-500">{job.status}</span>
             </div>
             <div className="flex justify-between my-4 h-16 items-center">
               <div className="flex-1">

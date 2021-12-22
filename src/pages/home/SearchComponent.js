@@ -19,7 +19,7 @@ const selectArray = [
   {
     name: "industry",
     options: [
-      "Industry Unlimited",
+      "Any Industry",
       "Banking And Finance",
       "Information Technology",
       "Telecommunication",
@@ -34,7 +34,7 @@ const selectArray = [
   {
     name: "category",
     options: [
-      "Category Unlimited",
+      "Any Category",
       "Backend Developer",
       "Manager",
       "Web Development",
@@ -55,8 +55,8 @@ const selectArray = [
       "Digital Marketing",
     ],
   },
-  { name: "type", options: ["Type Unlimited", "Full Time", "Part Time"] },
-  { name: "location", options: ["Locations Unlimited", "Phnom Penh"] },
+  { name: "type", options: ["Any Type", "Full Time", "Part Time"] },
+  { name: "location", options: ["Any Locations", "Phnom Penh"] },
 ];
 
 const SearchButton = ({ engText, khText }) => {

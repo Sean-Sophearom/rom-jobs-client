@@ -12,7 +12,7 @@ import NavbarLI from "./NavbarLI";
 //icons component
 import ReactCountryFlag from "react-country-flag";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { ImCross } from "react-icons/im";
+import { IoCloseSharp } from "react-icons/io5";
 import { BiUserCircle, BiMessageAdd } from "react-icons/bi";
 import { BsPerson, BsGear, BsBookmark, BsFileEarmarkPdf } from "react-icons/bs";
 import { VscSignOut } from "react-icons/vsc";
@@ -104,16 +104,16 @@ const Navbar = () => {
             <Logo />
           </div>
           <GiHamburgerMenu fontSize={24} className={`${isOpen ? "hidden" : "block"} cursor-pointer block lg:hidden `} onClick={openNav} />
-          <ImCross fontSize={20} className={`${isOpen ? "block" : "hidden"} cursor-pointer block lg:hidden`} onClick={closeNav} />
-          <div className={`nav-item-container ${isOpen ? "max-h-screen" : "max-h-0 py-0"}`}>
+          <IoCloseSharp fontSize={28} className={`${isOpen ? "block" : "hidden"} cursor-pointer block lg:hidden`} onClick={closeNav} />
+          <div className={`nav-item-container shadow-lg lg:shadow-none ${isOpen ? "max-h-screen" : "max-h-0 py-0"}`}>
             <NavbarLI to="/" primary={text.home[prefLang]} />
-            <NavbarLI to="/aboutus" primary={text.aboutUs[prefLang]} />
+            <NavbarLI to="/about" primary={text.aboutUs[prefLang]} />
             <NavbarLI to="/jobs" primary={text.jobs[prefLang]} />
             <NavbarLI to="/contact" primary={text.contact[prefLang]} />
             <LanguageComponent />
             {user.name ? (
               <div className="text-gray-500 cursor-pointer relative flex justify-center lg:justify-end xl:justify-center items-end group">
-                <BiUserCircle fontSize={28} className="transition-all text-purple-600 group-hover:scale-110 group-hover:mb-40 lg:group-hover:mb-0" />
+                <BiUserCircle fontSize={28} className="transition-all text-purple-600 group-hover:scale-110 group-hover:mb-48 lg:group-hover:mb-0" />
                 <div className="transition-all absolute max-h-0 group-hover:max-h-96 overflow-hidden top-8 lg:top-7">
                   <ul className="border border-gray-400 rounded-sm bg-white text-black">
                     <li>

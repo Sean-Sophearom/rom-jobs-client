@@ -1,5 +1,6 @@
 import React from "react";
 import JobCard from "../../components/JobCard";
+import Spinner from "../../components/Spinner";
 
 //for carousel
 import Slider from "react-slick";
@@ -11,7 +12,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Jobs = () => {
+const Jobs = ({ loading }) => {
   const jobs = useSelector((state) => state.job.data);
   var settings = {
     dots: true,
@@ -37,6 +38,9 @@ const Jobs = () => {
       },
     ],
   };
+
+  if (loading) return <Spinner />;
+
   return (
     <div className="box" lang="eng">
       <div className="my-6 pl-2 flex justify-between items-center text-gray-500">

@@ -18,6 +18,7 @@ const useFetchJob = (job_id) => {
       })
       .catch(() => {
         setLoading(false);
+        return setNotFound(true);
       });
   }, [job_id]);
 

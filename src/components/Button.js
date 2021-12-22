@@ -1,8 +1,7 @@
 import React from "react";
 import { CgSpinner } from "react-icons/cg";
 
-let buttonStyle =
-  "text-white px-4 py-1 rounded-sm content-box transition-all disabled:opacity-50 disabled:hover:bg-purple-500 flex justify-center items-center";
+let buttonStyle = "text-white px-4 py-1 rounded-sm content-box transition-all disabled:opacity-50 disabled:hover:bg-gray-500 flex justify-center items-center";
 
 const Button = ({ type, onClick, className, children, loading, disabled }) => {
   if (className?.includes("bg")) {

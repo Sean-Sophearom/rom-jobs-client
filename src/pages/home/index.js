@@ -11,22 +11,34 @@ import Container from "../../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../../redux/slices/job";
 import { resetJob } from "../../redux/slices/job";
+import { useState } from "react";
 
 const Home = () => {
   const { loading, page, data: jobs } = useSelector((state) => state.job);
   const dispatch = useDispatch();
+  const [smallLoading, setSmallLoading] = useState(false);
 
   useEffect(() => {
     page === 0 && dispatch(fetchJobs({ page }));
     jobs.length === 0 && dispatch(resetJob());
   }, [dispatch, page]);
 
-  if (loading) return <Loading />;
+  useEffect(() => {
+    if (loading) setSmallLoading(true);
+  }, [loading]);
+
+  useEffect(() => {
+    let timeout = null;
+    if (smallLoading) timeout = setTimeout(() => setSmallLoading(false), 500);
+    return () => clearTimeout(timeout);
+  }, [smallLoading]);
+
+  if (smallLoading) return <Loading />;
   return (
     <Container>
       <ImageSlider />
       <SearchComponent />
-      <Jobs />
+      <Jobs loading={loading} />
     </Container>
   );
 };

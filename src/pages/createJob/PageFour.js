@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import wp_img_arr from "../../static/img_import";
 import { IoMdCloudDone } from "react-icons/io";
 import axios from "../../axios";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import Button from "../../components/Button";
+import { showSnackbar } from "../../redux/slices/snackbar";
 
 const PageFour = ({ PrevPageBtn, newJob }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const postJob = async () => {
     try {
+      setLoading(true);
       const response = await axios.post("/job", newJob);
+      const job = response.data;
+      dispatch(showSnackbar({ msg: "Job posted successfully.", color: "blue" }));
+      setLoading(false);
       localStorage.removeItem("jobDraft");
-      console.log(response);
+      history.push("/jobDetail/" + job.job_id);
     } catch (err) {
       console.log(err);
     }
@@ -79,9 +90,9 @@ const PageFour = ({ PrevPageBtn, newJob }) => {
       <div className="flex justify-between items-center py-2 mt-4" lang="eng">
         <PrevPageBtn to="3" />
         <p className="text-lg">4/4</p>
-        <button onClick={postJob} className="btn px-4 text-sm sm:text-base flex items-center gap-2">
-          Post{<IoMdCloudDone />}
-        </button>
+        <Button loading={loading} onClick={postJob} className="btn px-4 text-sm sm:text-base flex items-center gap-2">
+          <span>Post</span> {<IoMdCloudDone className="inline" />}
+        </Button>
       </div>
     </div>
   );

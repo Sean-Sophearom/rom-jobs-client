@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { MdOutlineEdit } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const tags = [
+const tagsList = [
   "PHP",
   "Python",
   "JavaScript",
@@ -117,6 +117,10 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
   const [editRes, setEditRes] = useState(-1);
   const [newReq, setNewReq] = useState("");
   const [newRes, setNewRes] = useState("");
+  const [newTag, setNewTag] = useState("");
+  const [tags, setTags] = useState(tagsList);
+
+  const disabled = newJob.tags.length === 0;
 
   const addNewReq = (e) => {
     e.preventDefault();
@@ -128,6 +132,13 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
     e.preventDefault();
     setNewJob((prev) => ({ ...prev, responsibilities: [...prev.responsibilities, newRes] }));
     setNewRes("");
+  };
+
+  const addNewTag = (e) => {
+    e.preventDefault();
+    setNewJob((prev) => ({ ...prev, tags: [...prev.tags, newTag] }));
+    setTags((prev) => [...prev, newTag]);
+    setNewTag("");
   };
   return (
     <div lang="eng" className="animate-onLoadAnimation">
@@ -146,6 +157,10 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
               <TagComponent primary={tag} key={tag} newJob={newJob} setNewJob={setNewJob} />
             ))}
           </div>
+          <form onSubmit={addNewTag} className="flex flex-col sm:flex-row justify-center gap-2 pt-2">
+            <input type="text" className="input" value={newTag} placeholder="new tag..." onChange={(e) => setNewTag(e.target.value)} />
+            <button className="btn self-center sm:self-stretch px-6 sm:px-8">Add</button>
+          </form>
         </div>
 
         {/* <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4"> */}
@@ -157,21 +172,13 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
             <form onSubmit={addNewReq} className="flex flex-col sm:flex-row justify-center gap-2">
               <input value={newReq} onChange={(e) => setNewReq(e.target.value)} className="input" placeholder="new requirement..." />
               <button type="submit" disabled={!newReq} className="btn self-center sm:self-stretch px-6 sm:px-8">
-                add
+                Add
               </button>
             </form>
           </div>
           <div className="flex flex-col gap-3">
             {newJob.requirements.map((req, index) => (
-              <ReqComponent
-                key={req}
-                primary={req}
-                index={index}
-                editReq={editReq}
-                setEditReq={setEditReq}
-                setNewJob={setNewJob}
-                newJob={newJob}
-              />
+              <ReqComponent key={req} primary={req} index={index} editReq={editReq} setEditReq={setEditReq} setNewJob={setNewJob} newJob={newJob} />
             ))}
           </div>
         </div>
@@ -183,21 +190,13 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
             <form onSubmit={addNewRes} className="flex flex-col sm:flex-row justify-center gap-2">
               <input value={newRes} onChange={(e) => setNewRes(e.target.value)} className="input" placeholder="new responsibility..." />
               <button type="submit" disabled={!newRes} className="btn self-center sm:self-stretch px-6 sm:px-8">
-                add
+                Add
               </button>
             </form>
           </div>
           <div className="flex flex-col gap-3">
             {newJob.responsibilities.map((res, index) => (
-              <ResComponent
-                key={res}
-                primary={res}
-                index={index}
-                editRes={editRes}
-                setEditRes={setEditRes}
-                setNewJob={setNewJob}
-                newJob={newJob}
-              />
+              <ResComponent key={res} primary={res} index={index} editRes={editRes} setEditRes={setEditRes} setNewJob={setNewJob} newJob={newJob} />
             ))}
           </div>
         </div>
@@ -206,7 +205,14 @@ const PageThree = ({ NextPageBtn, PrevPageBtn, newJob, setNewJob }) => {
       <div className="flex justify-between items-center p-2 mt-4" lang="eng">
         <PrevPageBtn to="2" />
         <p className="text-lg">3/4</p>
-        <NextPageBtn to="4" />
+        <div className="group relative flex justify-end">
+          <NextPageBtn to="4" disabled={disabled} />
+          {disabled && (
+            <p className="absolute whitespace-nowrap bg-gray-500 text-white p-1 text-sm transition-all -top-8 scale-0 group-hover:scale-100">
+              Please select at least 1 tag.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

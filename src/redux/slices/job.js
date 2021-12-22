@@ -13,17 +13,19 @@ const initialState = {
     industry: "",
     category: "",
     type: "",
+    sort: "",
     keyword: "",
   },
 };
 
 export const fetchJobs = createAsyncThunk("job/getJobs", async (queryParams, thunkApi) => {
-  const { page, industry, category, level, type, keyword } = queryParams;
+  const { page, industry, category, level, type, keyword, sort } = queryParams;
   let apiLink = `/job/get?page=${page}`;
-  if (industry && !industry.includes("unlimited")) apiLink += `&industry=${industry}`;
-  if (level && !level.includes("unlimited")) apiLink += `&level=${level}`;
-  if (category && !category.includes("unlimited")) apiLink += `&category=${category}`;
-  if (type && !type.includes("unlimited")) apiLink += `&job_type=${type}`;
+  if (industry && !industry.includes("any")) apiLink += `&industry=${industry}`;
+  if (level && !level.includes("any")) apiLink += `&level=${level}`;
+  if (category && !category.includes("any")) apiLink += `&category=${category}`;
+  if (type && !type.includes("any")) apiLink += `&job_type=${type}`;
+  if (sort) apiLink += `&sort=${sort}`;
   if (keyword) apiLink += `&keyword=${keyword.trim()}`;
   try {
     const response = await axios.get(apiLink);
@@ -55,6 +57,9 @@ const jobSlice = createSlice({
       state.searchTerm = initialState.searchTerm;
       state.noMore = false;
     },
+    justSort: (state, { payload }) => {
+      state.searchTerm = { ...state.searchTerm, sort: payload };
+    },
   },
   extraReducers: (builder) => {
     //start of getJobs reducers
@@ -81,6 +86,6 @@ const jobSlice = createSlice({
   },
 });
 
-export const { chooseParam, resetJob, justSearched } = jobSlice.actions;
+export const { chooseParam, resetJob, justSearched, justSort } = jobSlice.actions;
 
 export default jobSlice.reducer;

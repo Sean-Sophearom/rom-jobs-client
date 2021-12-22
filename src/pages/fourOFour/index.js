@@ -6,14 +6,14 @@ import notFound from "../../static/undraw_page_not_found.svg";
 const index = () => {
   return (
     <Container>
-      <div className="box" lang="eng">
+      <div className="box text-xl sm:text-2xl font-medium" lang="eng">
         <img src={notFound} className="max-w-2xl w-full mx-auto" alt="page not found" />
-        <p className="text-center text-xl sm:text-2xl font-medium mt-4">
-          The page you're looking for is not found. You may have followed a broken link.
-          <Link to="/" className="block text-center text-purple-600 underline hover:no-underline">
-            Go back to homepage
+        <p className="text-center mt-4">The page you're looking for could not be found. You may have followed a broken link.</p>
+        <div className="flex justify-center">
+          <Link to="/" className="text-center bg-indigo-600 text-white p-2 rounded mt-2 hover:ring-4 ring-offset-4 ring-indigo-700 transition-all">
+            Take me back
           </Link>
-        </p>
+        </div>
       </div>
     </Container>
   );
