@@ -39,7 +39,12 @@ const Jobs = ({ loading }) => {
     ],
   };
 
-  if (loading) return <Spinner />;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center py-6">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className="box" lang="eng">
