@@ -25,7 +25,7 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="box flex flex-col gap-2 text-lg">
+      <div className="box flex flex-col gap-2 text-lg pt-6">
         <h2 className="mb-2 font-semibold text-2xl sm:text-3xl lg:text-4xl text-purple-600">Contact Info</h2>
         <p className="flex items-center gap-2">
           <AiOutlineMail /> romjobs.co@gmail.com
