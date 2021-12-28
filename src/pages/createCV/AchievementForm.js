@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Star from "../../components/Star";
+import parseDate from "../../hooks/useParseDate";
 
 const AchievementForm = ({ state, handleChange }) => {
   //if one field is filled, require all field
@@ -25,7 +26,7 @@ const AchievementForm = ({ state, handleChange }) => {
         <label htmlFor="date" className="cv-input-label">
           {text.date[prefLang]} {required && <Star />}
         </label>
-        <input className="cv-input" type="date" name="date" id="date" value={state.date} onChange={handleChange} required={required} />
+        <input className="cv-input" type="date" name="date" id="date" value={parseDate(state.date, "input-cv")} onChange={handleChange} required={required} />
       </div>
 
       <div>

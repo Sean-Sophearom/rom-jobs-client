@@ -41,7 +41,7 @@
   }
 
   .cv-input {
-    @apply outline-none transition-all px-2 py-[6px] border bg-white border-gray-300 rounded-sm w-full focus:ring-2 focus:ring-purple-400 text-gray-700;
+    @apply outline-none transition-all px-2 py-[6px] border bg-white border-gray-300 rounded-sm w-full focus-within:ring-2 focus-within:ring-purple-400 text-gray-700;
   }
 
   .display-cv-header {

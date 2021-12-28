@@ -33,8 +33,8 @@ const Index = () => {
 
   if (bigLoading) return <Loading />;
   return (
-    <Container>
-      <div className="bg-business-man bg-no-repeat bg-cover h-48 xs:h-64 sm:h-96 mb-4">
+    <Container lang="eng">
+      <div className="bg-business-man bg-no-repeat md:bg-center bg-cover h-48 xs:h-64 sm:h-96 mb-4">
         <div className="box flex items-center justify-center h-full md:justify-start md:items-end">
           <h1 lang="eng" className="text-5xl sm:text-6xl md:text-7xl font-bold">
             Jobs
@@ -74,7 +74,7 @@ const Index = () => {
         </div>
       )}
 
-      <div className="box flex justify-center" lang="eng">
+      <div className="box flex justify-center mb-2" lang="eng">
         {loading ? (
           <Spinner />
         ) : jobs.length === 0 ? (
@@ -84,7 +84,7 @@ const Index = () => {
             No More Jobs
           </button>
         ) : (
-          <button className="btn" onClick={fetchMore}>
+          <button className="btn bg-purple-600" onClick={fetchMore}>
             Show More
           </button>
         )}

@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "../../redux/slices/job";
 import { resetJob } from "../../redux/slices/job";
 import { useState } from "react";
+import Stats from "./Stats";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
   const { loading, page, data: jobs } = useSelector((state) => state.job);
@@ -39,6 +41,8 @@ const Home = () => {
       <ImageSlider />
       <SearchComponent />
       <Jobs loading={loading} />
+      <Stats />
+      <Testimonial />
     </Container>
   );
 };

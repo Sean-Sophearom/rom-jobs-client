@@ -8,6 +8,8 @@ const func = (date, type) => {
     return moment.utc(date).format("YYYY-MM-DD");
   }
 
+  if (type === "input-cv") return moment.utc(date).format("YYYY-MM-DD");
+
   if (type === "fromNow") {
     date = moment.utc(date).toDate();
     date.setHours(date.getHours() + 8);

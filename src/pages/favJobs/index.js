@@ -31,7 +31,7 @@ const Index = () => {
   if (loading) return <Loading />;
   return (
     <Container>
-      <div lang={prefLang} className="bg-business-man bg-no-repeat bg-cover h-48 xs:h-64 sm:h-96 mb-4">
+      <div lang={prefLang} className="bg-business-man bg-no-repeat md:bg-center bg-cover h-48 xs:h-64 sm:h-96 mb-4">
         <div className="box flex items-center justify-center h-full md:justify-start md:items-end md:pb-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">{text.path[prefLang]}</h1>
         </div>

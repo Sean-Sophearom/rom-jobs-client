@@ -13,7 +13,7 @@ const Snackbar = () => {
 
   const close = () => dispatch(closeSnackbar());
 
-  let className = "transition-all duration-300 max-w-xs font-medium p-2 pl-3 sm:p-3 md:px-4 text-white flex items-center gap-4 rounded-sm ";
+  let className = "transition-opacity duration-300 max-w-xs font-medium p-2 pl-3 sm:p-3 md:px-4 text-white flex items-center gap-4 rounded-sm ";
 
   if (show) className += " opacity-100 ";
   if (!show) className += " opacity-0 ";

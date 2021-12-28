@@ -20,8 +20,9 @@ module.exports = {
       },
       animation: { onLoadAnimation: "onLoadAnimation 1.5s ease" },
       backgroundImage: {
-        "business-man": "url('/src/static/business_man.jpg')",
-        cv: "url('/src/static/bg_cv.jpg')",
+        "business-man": "url('/src/static/christopher-gower-vjMgqUkS8q8-unsplash.jpg')",
+        cv: "url('/src/static/dan-dimmock-sNwnjxm8eTY-unsplash.jpg')",
+        contact: "url('/src/static/bg-contact.jfif')",
         "cv-2": "url('/src/static/bg_cv_2.jpg')",
         "job-application": "url('/src/static/online-application-job-form.jpeg')",
       },

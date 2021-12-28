@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Star from "../../components/Star";
 import countryOptions from "./countryOptions";
+import parseDate from "../../hooks/useParseDate";
 
 const WorkExpForm = ({ state, handleChange }) => {
   //if one field is filled, require all field
@@ -86,14 +87,30 @@ const WorkExpForm = ({ state, handleChange }) => {
         <label htmlFor="start_date_work" className="cv-input-label">
           {text.startDate[prefLang]} {required && <Star />}
         </label>
-        <input className="cv-input" type="date" name="start_date" id="start_date_work" value={state.start_date} onChange={handleChange} required={required} />
+        <input
+          className="cv-input"
+          type="date"
+          name="start_date"
+          id="start_date_work"
+          value={parseDate(state.start_date, "input-cv")}
+          onChange={handleChange}
+          required={required}
+        />
       </div>
 
       <div>
         <label htmlFor="end_date_work" className="cv-input-label">
           {text.endDate[prefLang]} {required && <Star />}
         </label>
-        <input className="cv-input" type="date" name="end_date" id="end_date_work" value={state.end_date} onChange={handleChange} required={required} />
+        <input
+          className="cv-input"
+          type="date"
+          name="end_date"
+          id="end_date_work"
+          value={parseDate(state.end_date, "input-cv")}
+          onChange={handleChange}
+          required={required}
+        />
       </div>
 
       <div>

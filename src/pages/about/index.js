@@ -213,6 +213,7 @@ const Index = () => {
             ))}
           </div>
         </div>
+        <div className="absolute -bottom-8 h-[40px] w-full bg-pink-500 z-[1000]" />
       </div>
     </Container>
   );

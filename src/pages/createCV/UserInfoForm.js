@@ -3,8 +3,8 @@ import Star from "../../components/Star";
 import TextareaAutosize from "react-textarea-autosize";
 import countryOptions from "./countryOptions";
 import { useSelector } from "react-redux";
-// import { Editor } from "react-draft-wysiwyg";
-// import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import RichEditor from "../../components/Editor";
+import parseDate from "../../hooks/useParseDate";
 
 const industryOptions = [
   "Accounting/Audit/Tax Services",
@@ -109,7 +109,15 @@ const UserInfoForm = ({ state, setState }) => {
           <label htmlFor="date_of_birth" className="cv-input-label">
             {text.dateOfBirth[prefLang]} <Star />
           </label>
-          <input className="cv-input" type="date" name="date_of_birth" id="date_of_birth" value={state.date_of_birth} onChange={handleChange} required />
+          <input
+            className="cv-input"
+            type="date"
+            name="date_of_birth"
+            id="date_of_birth"
+            value={parseDate(state.date_of_birth, "input-cv")}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div>
@@ -191,7 +199,7 @@ const UserInfoForm = ({ state, setState }) => {
             id="description"
             onChange={(e) => handleChange({ target: { name: "description", value: e.target.value } })}
           /> */}
-          {/* <Editor editorState={state.description} onEditorStateChange={(e) => console.log(e) || handleChange({ target: { name: "description", value: e } })} /> */}
+          <RichEditor value={state.description} onChange={(e) => handleChange({ target: { name: "description", value: e } })} />
         </div>
       </div>
     </div>

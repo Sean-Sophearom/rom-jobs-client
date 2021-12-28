@@ -17,21 +17,17 @@ const text = {
     eng: "About Us",
     kh: "អំពីយើង",
     desc: {
-      eng: "Rom Jobs is the leading job matching service specialized in IT in Cambodia. We offer the best IT career for you, grab it to consult with us now!",
+      eng: "Rom Jobs is a job finding service in Cambodia. Sign in and start applying now!",
       kh: (
         <span lang="eng">
-          Rom JOBS{" "}
-          <span lang="kh">
-            គឺជាអ្នកជំនាញស្វែងរកការងារ​​ និង​ ផ្គត់ផ្គង់បុគ្គលិកផ្នែកព័ត៍មានវិទ្យា ឈានមុខគេនៅកម្ពុជា។
-            ពួកយើងនឹងផ្តល់នូវការងារដ៏ល្អសម្រាប់អ្នក។ ចាប់ឱកាសនេះ​ និង ពិភាក្សាជាមួយពួកយើងឥឡូវនេះ។
-          </span>
+          Rom JOBS <span lang="kh">គឺជាអ្នកជំនាញស្វែងរកការងារ ឈានមុខគេនៅកម្ពុជា។ បង្កើតគណនី ហើយចាប់ផ្តើមដាក់ពាក្យឥឡូវនេះ។</span>
         </span>
       ),
     },
     btnTxt: { eng: "Learn More", kh: "ស្វែងយល់បន្ថែម" },
   },
   whyUs: {
-    eng: "Why Rom JOBS?",
+    eng: "Why choose Rom JOBS?",
     kh: (
       <span>
         ហេតុអ្វីជ្រើសយក{" "}
@@ -41,16 +37,16 @@ const text = {
       </span>
     ),
     desc: {
-      eng: "With our huge network, getting a job, the one you like, is just a few steps away.",
-      kh: "ជាមួយនឹងដៃគូរសហការជាច្រើនរបស់យើង លោកអ្នកអាចរកការងារដែលអ្នកចូលចិត្តចំណាយត្រឹមតែពីរបីជំហានប៉ុណ្ណោះ!",
+      eng: "With hundreds of jobs at your fingertip, landing your dream job is just a few clicks away.",
+      kh: "ជាមួយនឹងការងារជាច្រើនរបស់យើង លោកអ្នកអាចរកការងារដែលអ្នកចូលចិត្តចំណាយត្រឹមតែពីរបីជំហានប៉ុណ្ណោះ!",
     },
     btnTxt: { eng: "Register Now", kh: "ចុះឈ្មោះឥឡូវនេះ" },
   },
   jobAnnouncement: {
-    eng: "Job Announcement",
+    eng: "Job Posting",
     kh: "ឱកាសការងារ",
     desc: {
-      eng: "Be able to access to our vast pool of job opportunities. Beat the crowd and start applying for your next job now!",
+      eng: "Be able to access to our huge pool of job opportunities. Beat the crowd and start applying for your next job now!",
       kh: "អ្នកអាចចូលរកការងារជាច្រើននៅក្នុងគេហទំព័ររបស់យើង ចាប់យកឱកាស ហើយចាប់ផ្តើមដាក់ពាក្យសុំការងារឥឡូវនេះ។",
     },
     btnTxt: { eng: "Explore Jobs", kh: "ស្វែងរកការងារ" },

@@ -22,7 +22,7 @@ const Index = () => {
   return (
     <Container>
       <div className="animate-onLoadAnimation" lang="eng">
-        <div className="bg-business-man bg-no-repeat bg-cover h-48 xs:h-64 sm:h-96 mb-4">
+        <div className="bg-business-man bg-no-repeat bg-cover md:bg-center h-48 xs:h-64 sm:h-96 mb-4">
           <div className="box flex items-center justify-center h-full md:justify-start md:items-end md:pb-8">
             <h1 lang="eng" className="text-2xl sm:text-3xl md:text-4xl font-bold">
               Jobs ≫ All Applied Jobs

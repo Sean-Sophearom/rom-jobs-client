@@ -2,10 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import parseDate from "../../hooks/useParseDate";
 import { BiEditAlt } from "react-icons/bi";
+import Parser from "html-react-parser";
 
 const Text = ({ t1, t2, spanTwo }) => (
   <span className={spanTwo ? "md:col-span-2" : undefined}>
-    {t1}: <span className="cv-text">{t2}</span>
+    {t1}:{" "}
+    <span className="cv-text" lang="eng">
+      {t2}
+    </span>
   </span>
 );
 
@@ -32,7 +36,15 @@ const DisplayCV = ({ state, changeToEdit }) => {
     description: { kh: "បរិយាយអំពីខ្លួនឯង", eng: "Description" },
 
     workExp: { kh: "បទពិសោធន៍ការងារ", eng: "Work Experience" },
-    noWorkExp: { kh: "គ្ម្មានបទពិសោធន៍ការងារ", eng: "No work experiences" },
+    noWorkExp: {
+      kh: "គ្ម្មានបទពិសោធន៍ការងារ",
+      eng: (
+        <span>
+          No work experiences{" "}
+          <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
     company: { kh: "ស្ថាប័ន", eng: "Company" },
     typeOfExp: { kh: "ប្រភេទបទពិសោធន៍", eng: "Type of Experience" },
     startDate: { kh: "កាលបរិច្ឆេទចាប់ផ្តើម", eng: "Start Date" },
@@ -40,7 +52,14 @@ const DisplayCV = ({ state, changeToEdit }) => {
     workExpDesc: { kh: "បរិយាយអំពីបទពិសោធន៍", eng: "Experience Description" },
 
     education: { kh: "ការអប់រំ", eng: "Education" },
-    noEducation: { kh: "គ្ម្មានការអប់រំ", eng: "No educations" },
+    noEducation: {
+      kh: "គ្ម្មានការអប់រំ",
+      eng: (
+        <span>
+          No educations. <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
     school: { kh: "សាលា / សាកលវិទ្យាល័យ", eng: "School / University" },
     degree: { kh: "កម្រិតសិក្សា", eng: "Degree" },
     major: { kh: "មុខជំនាញ", eng: "Major" },
@@ -48,20 +67,48 @@ const DisplayCV = ({ state, changeToEdit }) => {
     eduEndDate: { kh: "កាលបរិច្ឆេទបញ្ចប់ការសិក្សា", eng: "End Date" },
 
     achievement: { kh: "សមិទ្ធិផល", eng: "Achievement" },
-    noAchievement: { kh: "គ្ម្មានសមិទ្ធិផល", eng: "No achievements" },
+    noAchievement: {
+      kh: "គ្ម្មានសមិទ្ធិផល",
+      eng: (
+        <span>
+          No achievements. <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
     title: { kh: "ឈ្មោះសមិទ្ធិផល", eng: "Achievement Title" },
     achievementDate: { kh: "កាលបរិច្ឆេទ", eng: "Achievement Date" },
     achievementDesc: { kh: "លម្អិតអំពីសមិទ្ធិផល", eng: "Achievement Detail" },
 
     language: { kh: "ភាសា", eng: "Language" },
-    noLanguage: { kh: "គ្ម្មានភាសា", eng: "No languages" },
+    noLanguage: {
+      kh: "គ្ម្មានភាសា",
+      eng: (
+        <span>
+          No languages. <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
     level: { kh: "កម្រិត", eng: "Level" },
 
     skill: { kh: "ជំនាញ", eng: "Skill" },
-    noSkill: { kh: "គ្ម្មានជំនាញ", eng: "No skills" },
+    noSkill: {
+      kh: "គ្ម្មានជំនាញ",
+      eng: (
+        <span>
+          No skills. <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
 
     reference: { kh: "អ្នកធានា", eng: "Reference" },
-    noReference: { kh: "គ្ម្មានអ្ន្នកធានា", eng: "No references" },
+    noReference: {
+      kh: "គ្ម្មានអ្ន្នកធានា",
+      eng: (
+        <span>
+          No references. <span className="text-gray-500 text-sm block">(We recommend you fill out this field to improve your chances of getting hired.)</span>
+        </span>
+      ),
+    },
     name: { kh: "ឈ្មោះ", eng: "Name" },
     position: { kh: "មុខរបរ", eng: "Position" },
   };
@@ -93,7 +140,7 @@ const DisplayCV = ({ state, changeToEdit }) => {
           <Text t1={text.industry[prefLang]} t2={info.industry} />
           <Text t1={text.city[prefLang]} t2={info.city} />
           <Text t1={text.address[prefLang]} t2={info.address} spanTwo />
-          <Text t1={text.description[prefLang]} t2={info.description} />
+          <Text t1={text.description[prefLang]} t2={Parser(info.description)} />
         </div>
       </div>
 

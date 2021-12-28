@@ -10,11 +10,14 @@ import { BsTrash } from "react-icons/bs";
 import { clearUser } from "../../redux/slices/userSlice";
 import { useHistory } from "react-router-dom";
 import axios from "../../axios";
+import Button from "../../components/Button";
+import { showSnackbar } from "../../redux/slices/snackbar";
 
 const Index = () => {
   const prefLang = useSelector((state) => state.prefLang);
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -23,7 +26,10 @@ const Index = () => {
   const open = () => setShow(true);
 
   const updatePW = () => {
-    axios.put("/auth/updatePW", { password }).then(() => history.push("/"));
+    setLoading(true);
+    axios
+      .put("/auth/updatePW", { password })
+      .then(() => (dispatch(showSnackbar({ msg: "You have successfully reset your password.", color: "blue" })) && history.push("/")) || setLoading(false));
   };
 
   const text = {
@@ -60,9 +66,9 @@ const Index = () => {
               icon={showPw ? AiOutlineEyeInvisible : AiOutlineEye}
               iconOnClick={() => setShowPw(!showPw)}
             />
-            <button className="btn py-1 px-3 block mb-4" disabled={!password} onClick={updatePW}>
+            <Button loading={loading} className="btn py-1 px-3 block mb-4" disabled={!password} onClick={updatePW}>
               {text.save[prefLang]}
-            </button>
+            </Button>
           </div>
         </div>
       </Container>
