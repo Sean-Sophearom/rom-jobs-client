@@ -31,7 +31,10 @@ const Index = () => {
     dispatch(fetchJobs({ page: 0, ...searchTerm, sort }));
   }, [sort]);
 
+  useEffect(() => (document.title = "Jobs | Rom JOBS"), []);
+
   if (bigLoading) return <Loading />;
+
   return (
     <Container lang="eng">
       <div className="bg-business-man bg-no-repeat md:bg-center bg-cover h-48 xs:h-64 sm:h-96 mb-4">

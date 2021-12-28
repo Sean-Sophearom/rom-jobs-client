@@ -11,6 +11,14 @@ const MyJobs = () => {
   useEffect(() => {
     axios.get("/job/myJobs").then((res) => setJobs(res.data));
   }, []);
+
+  const stopHiring = (id) => {
+    console.log(id);
+    axios.patch(`/job/stop/${id}`).then((res) => {
+      const updatedJobs = jobs.map((job) => (job.job_id === id ? { ...job, status: "Closed" } : job));
+      setJobs(updatedJobs);
+    });
+  };
   return (
     <>
       <h2 className="font-semibold text-purple-600 text-2xl py-6" lang="eng">
@@ -46,10 +54,12 @@ const MyJobs = () => {
               <p className={`p-2 text-gray-700 border-b col-span-2 ${i % 2 === 0 && "bg-gray-100"}`}>{parseDate(job.date_added, "fromNow")}</p>
               <p className={`p-2 text-gray-700 border-b ${i % 2 === 0 && "bg-gray-100"}`}>{job.status}</p>
               <p
-                className={`p-2 flex justify-center text-gray-700 ${job.status === "Hiring" && "text-red-700"} font-medium border-b ${
+                className={`p-2 flex justify-center text-gray-500 ${job.status === "Hiring" && "text-red-700"} font-medium border-b ${
                   i % 2 === 0 && "bg-gray-100"
                 }`}>
-                <span className="hover:underline cursor-pointer">Stop </span>
+                <span onClick={() => stopHiring(job.job_id)} className="hover:underline cursor-pointer">
+                  {job.status === "Hiring" ? "Stop" : "Closed"}
+                </span>
               </p>
             </React.Fragment>
           ))}

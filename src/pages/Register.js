@@ -28,6 +28,8 @@ const Register = () => {
     dispatch(clearAllError());
   }, [dispatch]);
 
+  useEffect(() => (document.title = "Register an account | Rom JOBS"), []);
+
   useEffect(() => {
     let user1 = localStorage.getItem("user");
     let user2 = sessionStorage.getItem("user");

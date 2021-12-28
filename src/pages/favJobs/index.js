@@ -21,6 +21,8 @@ const Index = () => {
       .catch(() => setLoading(false));
   }, []);
 
+  useEffect(() => (document.title = "My Favorite jobs | Rom JOBS"), []);
+
   const text = {
     path: { kh: "ការងារ ≫ ការងារដែលបានរក្សាទុក", eng: "Jobs ≫ My Favorite Jobs" },
     heading: { kh: "ការងារដែលបានរក្សាទុក", eng: "My Favorite Jobs" },

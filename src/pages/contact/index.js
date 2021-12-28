@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../../components/Container";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import TextareaAutosize from "react-textarea-autosize";
 import { useDispatch } from "react-redux";
 import { showSnackbar } from "../../redux/slices/snackbar";
+import axios from "../../axios";
+import { useRef } from "react";
+import Button from "../../components/Button";
+import { useState } from "react";
 
 const Index = () => {
   const dispatch = useDispatch();
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const textRef = useRef();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => (document.title = "Contact US | Rom JOBS"), []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(showSnackbar({ msg: "Please fill in all the fields.", color: "red" }));
-    dispatch(showSnackbar({ msg: "Your message have been sent successfuly.", color: "blue" }));
+
+    const dataToSend = {
+      email: emailRef.current.value,
+      text: textRef.current.value,
+      name: nameRef.current.value,
+    };
+
+    if (!dataToSend.email || !dataToSend.text) return dispatch(showSnackbar({ msg: "Please fill in all the required fields.", color: "red" }));
+
+    setLoading(true);
+
+    axios
+      .post("/message", dataToSend)
+      .then((res) => console.log(res) || setLoading(false) || clearRef())
+      .catch((err) => console.log(err) || setLoading(false) || clearRef());
+
+    function clearRef() {
+      dispatch(showSnackbar({ msg: "Your message have been sent successfuly. We will get back to you as soon as possible", color: "blue" }));
+      emailRef.current.value = "";
+      textRef.current.value = "";
+      nameRef.current.value = "";
+    }
   };
 
   return (
@@ -44,22 +75,25 @@ const Index = () => {
                 <label htmlFor="name">
                   Your Name <span className="text-gray-400 text-xs">(Optional)</span>
                 </label>
-                <input id="name" type="text" className="cv-input rounded" />
+                <input maxLength={255} ref={nameRef} id="name" type="text" className="cv-input rounded" />
               </div>
               <div className="flex flex-col gap-2 mt-4">
                 <label htmlFor="email">Your Email</label>
-                <input id="email" type="email" required className="cv-input rounded" />
+                <input maxLength={255} ref={emailRef} id="email" type="email" required className="cv-input rounded" />
               </div>
             </div>
             <div className="flex flex-col gap-2 mt-4 md:mt-0 flex-1">
               <label htmlFor="message">Your Message</label>
-              <TextareaAutosize minRows={3} maxRows={20} id="message" required className="cv-input md:flex-1 rounded" />
+              <TextareaAutosize ref={textRef} minRows={3} maxRows={20} id="message" required className="cv-input md:flex-1 rounded" />
             </div>
           </div>
           <div className="py-2 pt-6 flex items-center justify-center">
-            <button className="rounded-full bg-purple-600 px-6 py-2 hover:ring-2 ring-purple-600 ring-offset-2 transition-all text-white" type="submit">
+            <Button
+              loading={loading}
+              className="rounded-full bg-purple-600 px-6 py-2 hover:ring-2 ring-purple-600 ring-offset-2 transition-all text-white"
+              type="submit">
               Send
-            </button>
+            </Button>
           </div>
         </form>
       </div>

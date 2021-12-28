@@ -35,6 +35,8 @@ const Home = () => {
     return () => clearTimeout(timeout);
   }, [smallLoading]);
 
+  useEffect(() => (document.title = "Home | Rom JOBS"), []);
+
   if (smallLoading) return <Loading />;
   return (
     <Container>

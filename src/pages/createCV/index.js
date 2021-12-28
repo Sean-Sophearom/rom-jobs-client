@@ -44,6 +44,8 @@ const Index = () => {
   const [editing, setEditing] = useState(false);
   const { user_id } = useSelector((state) => state.user.data);
 
+  useEffect(() => (document.title = "Create CV | Rom JOBS"), []);
+
   useEffect(() => {
     (async () => {
       setLoading(true);

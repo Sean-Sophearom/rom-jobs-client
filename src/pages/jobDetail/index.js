@@ -33,6 +33,8 @@ const Index = () => {
     if (!applied) setApplied((prev) => ({ ...prev, state: false }));
   }, [job]);
 
+  useEffect(() => (document.title = loading ? "Loading... | Rom JOBS" : `${job.name} | Rom JOBS`), [loading]);
+
   const toggleFav = () => {
     if (!user.user_id) return history.push("/login") || dispatch(showSnackbar({ msg: "Please log in first.", color: "red" }));
 
@@ -161,7 +163,7 @@ const Index = () => {
         )}
       </section>
 
-      <section className="box" lang="eng">
+      <section className="box pb-10" lang="eng">
         <div className="mb-4 mt-2 pl-2 flex justify-between items-center text-gray-500">
           <h2 className="text-purple-600 font-semibold text-2xl">Related Jobs</h2>
           <Link to="/jobs" className="hover:underline cursor-pointer">

@@ -29,7 +29,7 @@ const UpdatesTable = ({ application }) => {
             </Link>
           ))}
         </div>
-        <p className="py-4 text-center">No more activities</p>
+        <p className="py-4 text-center">No more applications</p>
       </div>
     </div>
   );

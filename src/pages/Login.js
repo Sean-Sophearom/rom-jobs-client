@@ -30,6 +30,8 @@ const Login = () => {
     dispatch(clearAllError());
   }, [dispatch]);
 
+  useEffect(() => (document.title = "Login to Rom JOBS"), []);
+
   useEffect(() => {
     let user1 = localStorage.getItem("user");
     let user2 = sessionStorage.getItem("user");

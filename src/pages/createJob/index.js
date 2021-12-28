@@ -52,6 +52,8 @@ const CreateJob = () => {
     localStorage.setItem("jobDraft", JSON.stringify(newJob));
   }, [newJob]);
 
+  useEffect(() => (document.title = "Post a job | Rom JOBS"), []);
+
   const incrementPage = () => {
     headerRef.current.scrollIntoView();
   };

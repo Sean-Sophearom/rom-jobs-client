@@ -21,7 +21,7 @@ const Testimonial = () => {
   return (
     <div className="py-6">
       <h1 lang="eng" className="text-center font-medium text-2xl sm:text-3xl lg:text-4xl">
-        Testimonial
+        See what our users are saying
       </h1>
       <div lang="eng" className="box hidden sm:flex gap-6 py-6 my-6">
         {items.map((item, idx) => (

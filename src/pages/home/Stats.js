@@ -10,6 +10,7 @@ const Stats = () => {
   useEffect(() => {
     axios.get("/stats").then(({ data }) => setStats(data));
   }, []);
+
   return (
     <div lang="eng" className="bg-purple-700 py-6 text-white my-8">
       <div className="box flex flex-col sm:flex-row gap-4 sm:gap-12 text-gray-500">

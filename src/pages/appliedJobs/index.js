@@ -16,6 +16,7 @@ const Index = () => {
   useEffect(() => {
     setLoading(true);
     axios.get("/app").then(({ data }) => setApplication(data) || setLoading(false));
+    document.title = "Applied Jobs | Rom JOBS";
   }, []);
 
   if (loading) return <Loading />;

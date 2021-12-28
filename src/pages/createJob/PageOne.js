@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 const text = {
   createANewJob: {
     kh: "បង្កើតការងារថ្មី",
-    eng: "Create a new Job",
+    eng: "Post a new Job",
   },
   choices: {
     kh: "បង្កើតការងារថ្មីដោយខ្លួនអ្នក​ ឬក៏ជ្រើសរើសគម្រូមួយ?",
-    eng: "Create a new job by yourself or choose from an existing template?",
+    eng: "Post a new job by yourself or choose from an existing template?",
   },
   choiceOne: {
     kh: "បង្កើតដោយខ្លួនឯង",
-    eng: "Create by myself.",
+    eng: "Post by myself.",
   },
   choiceTwo: {
     kh: "ជ្រើសរើសពីគម្រូ",

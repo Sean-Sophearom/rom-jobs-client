@@ -31,11 +31,11 @@ const faq = [
         For frontend, I used React as the library, Redux to manage my states and TailwindCSS for the styling. I know this can be bad for SEO which is exactly
         why I'm diving into Next.js after this project. For the backend or the api, I used Node.js and Express.js for the server and MySQL as the database. I
         also used Git and Github to control the version as well as keep tracks of all the changes on this site. The frontend is hosted on{" "}
-        <a href="https://www.netlify.com/" target="_blank" className="underline font-medium text-blue-700">
+        <a rel="noreferrer" href="https://www.netlify.com/" target="_blank" className="underline font-medium text-blue-700">
           Netlify
         </a>{" "}
         and the backend on{" "}
-        <a href="https://www.heroku.com/" target="_blank" className="underline font-medium text-blue-700">
+        <a rel="noreferrer" href="https://www.heroku.com/" target="_blank" className="underline font-medium text-blue-700">
           Heroku
         </a>
         .
@@ -52,7 +52,7 @@ const faq = [
     answer: (
       <span>
         The design of this website is heavily inspired by{" "}
-        <a href="https://www.jobify.works" target="_blank" className="underline font-medium text-blue-700">
+        <a rel="noreferrer" href="https://www.jobify.works" target="_blank" className="underline font-medium text-blue-700">
           Jobify.works
         </a>
         {". "}
@@ -66,11 +66,11 @@ const faq = [
     answer: (
       <span>
         I got all the human illustrations from{" "}
-        <a href="https://www.Undraw.co" target="_blank" className="underline font-medium text-blue-700">
+        <a rel="noreferrer" href="https://www.Undraw.co" target="_blank" className="underline font-medium text-blue-700">
           Undraw.co
         </a>{" "}
         and the wave svg (like the one above) from{" "}
-        <a href="https://www.softr.io/tools/svg-wave-generator" target="_blank" className="underline font-medium text-blue-700">
+        <a rel="noreferrer" href="https://www.softr.io/tools/svg-wave-generator" target="_blank" className="underline font-medium text-blue-700">
           Softr.io
         </a>
       </span>
@@ -83,6 +83,7 @@ const Index = () => {
 
   useEffect(() => {
     axios.get("/stats").then(({ data }) => setStats(data));
+    document.title = "About | Rom JOBS";
   }, []);
   return (
     <Container lang="eng">

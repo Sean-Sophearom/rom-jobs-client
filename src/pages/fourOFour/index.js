@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "../../components/Container";
 import notFound from "../../static/undraw_page_not_found.svg";
 
-const index = () => {
+const Index = () => {
+  useEffect(() => (document.title = "Not found :( Rom JOBS"), []);
+
   return (
     <Container>
       <div className="box text-xl sm:text-2xl font-medium" lang="eng">
@@ -19,4 +21,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

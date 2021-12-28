@@ -2,8 +2,8 @@ import axios from "axios";
 
 const instance = axios.create();
 
-instance.defaults.baseURL = "https://romjobs-server.herokuapp.com/api/";
-// instance.defaults.baseURL = "http://localhost:5000/api/";
+// instance.defaults.baseURL = "https://romjobs-server.herokuapp.com/api/";
+instance.defaults.baseURL = "http://localhost:5000/api/";
 
 instance.interceptors.request.use(function (req) {
   let user = localStorage.getItem("user");

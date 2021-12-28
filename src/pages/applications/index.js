@@ -22,6 +22,8 @@ const Index = () => {
       .catch(() => setLoading(false));
   }, [window.location.pathname]);
 
+  useEffect(() => (document.title = "Applications | Rom JOBS"), []);
+
   if (loading) return <Loading />;
 
   return (
