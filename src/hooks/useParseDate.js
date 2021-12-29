@@ -12,8 +12,8 @@ const func = (date, type) => {
 
   if (type === "fromNow") {
     date = moment.utc(date).toDate();
-    date.setHours(date.getHours() + 8);
-    date.setMinutes(date.getMinutes() - 60);
+    // date.setHours(date.getHours() + 8);
+    // date.setMinutes(date.getMinutes() - 60);
     date = moment.utc(date).fromNow();
     return date;
   }
