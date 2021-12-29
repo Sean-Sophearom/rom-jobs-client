@@ -15,9 +15,7 @@ import waveThree from "./wave_three.svg";
 import waveFour from "./wave_four.svg";
 import person_img from "./undraw_mathematics.svg";
 import resume_img from "./undraw_resume.svg";
-import resume_two_img from "./undraw_resume_two.svg";
 import portfolio_img from "./undraw_portfolio.svg";
-import team_img from "./undraw_team.svg";
 import proud_img from "./undraw_proud.svg";
 import at_work_img from "./undraw_at_work.svg";
 import { Link } from "react-router-dom";
@@ -107,10 +105,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="box py-6">
-        <h2 className="text-purple-500 font-medium text-xl md:text-2xl">Frequently Asked Questions:</h2>
-      </div> */}
 
       <img src={waveOne} className="bg-indigo-700 pb-4 md:pb-0 -mt-px relative md:-top-4 z-[-10]" />
 

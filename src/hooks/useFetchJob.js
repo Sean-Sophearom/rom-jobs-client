@@ -12,7 +12,6 @@ const useFetchJob = (job_id) => {
       .get(`/job/get/${job_id}`)
       .then(({ data }) => {
         setJob(data);
-        console.log(data);
         setLoading(false);
         if (Object.keys(data).length === 0) return setNotFound(true);
       })

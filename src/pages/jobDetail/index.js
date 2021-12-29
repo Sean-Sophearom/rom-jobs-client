@@ -13,6 +13,7 @@ import axios from "../../axios";
 import Button from "../../components/Button";
 import { showSnackbar } from "../../redux/slices/snackbar";
 import parseDate from "../../hooks/useParseDate";
+import Star from "../../components/Star";
 
 const Index = () => {
   const { id } = useParams();
@@ -161,6 +162,11 @@ const Index = () => {
             </ul>
           </div>
         )}
+
+        <div className="text-sm sm:text-base">
+          <h3 className="font-semibold text-lg text-purple-700 mt-6 mb-4 lg:mt-8 lg:mb-6 after:content-['*'] after:text-red-500">Disclaimer </h3>
+          <p>This website is for demonstration purpose only. The job posting above is not an actual job posting.</p>
+        </div>
       </section>
 
       <section className="box pb-10" lang="eng">

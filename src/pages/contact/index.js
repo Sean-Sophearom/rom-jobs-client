@@ -37,7 +37,7 @@ const Index = () => {
       .catch((err) => console.log(err) || setLoading(false) || clearRef());
 
     function clearRef() {
-      dispatch(showSnackbar({ msg: "Your message have been sent successfuly. We will get back to you as soon as possible", color: "blue" }));
+      dispatch(showSnackbar({ msg: "Your message has been sent successfuly. We will get back to you as soon as possible", color: "blue" }));
       emailRef.current.value = "";
       textRef.current.value = "";
       nameRef.current.value = "";

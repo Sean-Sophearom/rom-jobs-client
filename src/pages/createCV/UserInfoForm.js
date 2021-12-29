@@ -191,14 +191,9 @@ const UserInfoForm = ({ state, setState }) => {
 
         <div className="col-span-1 lg:col-span-2">
           <label htmlFor="description" className="cv-input-label">
-            {text.description[prefLang]} <Star />
+            {text.description[prefLang]}
           </label>
-          {/* <input className="cv-input" type="text" name="github" id="github" value={state.github} onChange={handleChange} /> */}
-          {/* <DefaultEditor
-            value={state.description}
-            id="description"
-            onChange={(e) => handleChange({ target: { name: "description", value: e.target.value } })}
-          /> */}
+
           <RichEditor value={state.description} onChange={(e) => handleChange({ target: { name: "description", value: e } })} />
         </div>
       </div>

@@ -81,7 +81,7 @@ const Index = () => {
         {loading ? (
           <Spinner />
         ) : jobs.length === 0 ? (
-          <span className="text-center">No results found :( Perhaps, try a different keyword</span>
+          <span className="text-center my-6">No results found :( Perhaps, try a different keyword</span>
         ) : noMore ? (
           <button className="btn" disabled>
             No More Jobs
